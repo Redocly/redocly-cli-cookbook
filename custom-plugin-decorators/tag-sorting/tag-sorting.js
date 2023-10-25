@@ -1,4 +1,4 @@
-const SortTagsAlphabetically = require('./decorator-alpha.js');
+const SortTagsAlphabetically = require('./decorator-alpha');
 
 module.exports = {
   id: 'tag-sorting',

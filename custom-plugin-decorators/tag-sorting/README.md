@@ -15,7 +15,7 @@ Here's the main plugin entrypoint, it's in `tag-sorting.js`:
 
 ```javascript
 
-const SortTagsAlphabetically = require('./decorator-alpha.js');
+const SortTagsAlphabetically = require('./decorator-alpha');
 
 module.exports = {
   id: 'tag-sorting',
@@ -60,7 +60,7 @@ Add the plugin to `redocly.yaml` and enable the decorator:
 
 ```yaml
 plugins:
-  - 'plugins/tag-sorting.js'
+  - './tag-sorting.js'
 
 decorators:
   tag-sorting/alphabetical: on
