@@ -17,7 +17,7 @@ Use the content here as a starting point for your own work.
 
 3. Copy and paste the examples you want to use into your own setup, then edit them to fit your own needs.
 
-If you come up with something new, please consider sharing it here by opening a pull request?
+If you come up with something new, please consider sharing it here by opening a pull request.
 
 ## Categories
 
