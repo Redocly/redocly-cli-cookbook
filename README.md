@@ -11,7 +11,7 @@ If you're new to Redocly CLI, start with the [documentation](https://redocly.com
 
 ### Rulesets
 
-Combine existing [built-in rules](https://redocly.com/docs/cli/rules/built-in-rules/) in ways that serve a specific purpose.
+Combine existing [built-in rules](https://redocly.com/docs/cli/rules/built-in-rules/) in ways that serve a specific purpose, and make a [resuable ruleset](https://redocly.com/docs/cli/guides/configure-rules/#create-a-reusable-ruleset).
 
 ### Configurable rules
 
