@@ -37,6 +37,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 #### Decorators (for custom plugins)
 
+* [Tag sorting](./custom-plugin-decorators/tag-sorting) - put your tags list in alphabetical order.
+
 #### Rules (for custom plugins)
 
 ### Miscellaneous (including tips and tricks)
