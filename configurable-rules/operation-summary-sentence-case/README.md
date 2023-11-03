@@ -16,7 +16,7 @@ Here's how the configurable rule looks in the `redocly.yaml` file:
 ```yaml
 rules:  
   rule/operation-summary-sentence-case:
-    subject: ``
+    subject:
       type: Operation
       property: summary
     message: "Operation summary must be sentence cased."
