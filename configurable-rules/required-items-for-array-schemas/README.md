@@ -38,15 +38,12 @@ This rule will error if an array is declared without an `items` field.
 Here's a sample of an OpenAPI description:
 
 ```yaml
-
----
+# ...
 components:
   schemas:
-    # This will error
-    noItems:
+    NoItems: # This will error
       type: array
-    # This will pass
-    withItems:
+    WithItems: # This will pass
       type: array
       items:
         type: string
