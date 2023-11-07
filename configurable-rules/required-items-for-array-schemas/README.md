@@ -48,4 +48,6 @@ components:
       type: array
       items:
         type: string
+    NotArray: # This will pass, doesn't match the 'where' clause
+      type: string
 ```
