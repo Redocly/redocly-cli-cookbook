@@ -10,6 +10,8 @@ When declaring a JSON Schema, it's possible to define an array without specifyin
 Linting with Redocly tools simply omits this, as it is considered an arbitrary array with any kind of item.
 However, to enforce the explicitness, you can use a [configurable rule](https://redocly.com/docs/cli/rules/configurable-rules/).
 
+**Note:** Whilst OAS 3.0.x specification does not enforce using the `items` field in descriptions, OAS 3.1.x fully supports JSON Schema 2020-12 draft which requires it. However, Redocly CLI doesn't alter the behavior and allows the omission of `items`.
+
 ## Code
 
 Add this to the `rules` section of your `redocly.yaml`:
