@@ -5,7 +5,7 @@ Authors:
 
 ## What this does and why
 
-**What** -- this rule enforces a consistent patterns of capitalization on Operation summaries.  
+**What** -- this rule enforces a consistent pattern of capitalization on Operation summaries.  
 
 **Why** -- "Sentence casing vs title casing" may be the "tabs vs spaces" of the writing world, but being _consistent_ is often more important than being right. At Redocly, we prefer sentence casing for Operation summaries. By adding this configurable rule to our linter, we ensure our entire team writes them that way.
 
@@ -16,7 +16,7 @@ Here's how the configurable rule looks in the `redocly.yaml` file:
 ```yaml
 rules:  
   rule/operation-summary-sentence-case:
-    subject:
+    subject: 
       type: Operation
       property: summary
     message: "Operation summary must be sentence cased."
@@ -28,6 +28,7 @@ rules:
 This rule can be repurposed for other fields with a single sentence, but not multiple sentences.
 
 ### Rule explanation
+
 This rule asserts that each Operation `summary` matches the regex defined in `pattern`. The regex we defined matches strings that:
 1. Start with an uppercase letter
 2. Are followed by 1+ characters that are _not_ uppercase letters
