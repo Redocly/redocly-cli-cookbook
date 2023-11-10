@@ -43,6 +43,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 #### Rules (for custom plugins)
 
+- [Validate Markdown](./custom-plugin-rules/markdown-validator) - check Markdown in description fields is valid.
+
 ### Miscellaneous (including tips and tricks)
 
 Share anything that didn't fit the existing categories here.
