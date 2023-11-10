@@ -31,6 +31,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 
 - [Ban certain words from descriptions](configurable-rules/description-banned-words/)
 - [Require `items` field for schemas of type `array`](configurable-rules/required-items-for-array-schemas/)
+- [Ensure sentence case in operation summaries](configurable-rules/operation-summary-sentence-case)
 
 ### Custom plugins
 
