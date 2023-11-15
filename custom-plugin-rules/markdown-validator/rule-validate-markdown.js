@@ -42,9 +42,9 @@ function ValidateMarkdown() {
   console.log("OpenAPI Markdown: validate");
   return {
    Info: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
+      enter({ description }, ctx) {
+        if(description) {
+          return checkString(description, ctx);
           
         }
       }
