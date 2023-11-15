@@ -1,37 +1,41 @@
 const markdownlint = require("markdownlint");
 const config = {
   // the list is here https://github.com/DavidAnson/markdownlint#rules--aliases
-  MD013: {line_length: 120},
+  MD013: { line_length: 120 },
   MD041: false, // first line should be h1
   MD047: false, // should end with newline
-}
+};
 
 function checkString(description, ctx) {
   let options = {
-    "strings": {
-      "desc": description
+    strings: {
+      desc: description,
     },
-    "config": config
+    config: config,
   };
   markdownlint(options, function callback(err, result) {
     if (!err) {
       // if there's no problem do nothing
-      if (result.desc.length) { // desc is the key in the options.strings object
+      if (result.desc.length) {
+        // desc is the key in the options.strings object
         let lines = description.split("\n");
 
         result.desc.forEach((desc) => {
           message = desc.ruleDescription;
           // add line number context for longer entries
-          if (desc.lineNumber > 1 ) {
-            message = message + " (near: " + lines[desc.lineNumber].substring(0,20) + "... )";
+          if (desc.lineNumber > 1) {
+            message =
+              message +
+              " (near: " +
+              lines[desc.lineNumber].substring(0, 20) +
+              "... )";
           }
 
           ctx.report({
             message: message,
-            location: ctx.location.child('description'),
+            location: ctx.location.child("description"),
           });
         });
-
       }
     }
   });
@@ -40,40 +44,35 @@ function checkString(description, ctx) {
 function ValidateMarkdown() {
   console.log("OpenAPI Markdown: validate");
   return {
-   Info: {
+    Info: {
       enter({ description }, ctx) {
-        if(description) {
+        if (description) {
           return checkString(description, ctx);
-          
         }
-      }
+      },
     },
-   Tag: {
+    Tag: {
       enter({ description }, ctx) {
-        if(description) {
+        if (description) {
           return checkString(description, ctx);
-          
         }
-      }
+      },
     },
-   Operation: {
+    Operation: {
       enter({ description }, ctx) {
-        if(description) {
+        if (description) {
           return checkString(description, ctx);
-          
         }
-      }
+      },
     },
-   Parameter: {
+    Parameter: {
       enter({ description }, ctx) {
-        if(description) {
+        if (description) {
           return checkString(description, ctx);
-          
         }
-      }
+      },
     },
-  }
+  };
 }
 
-module.exports = ValidateMarkdown
-
+module.exports = ValidateMarkdown;
