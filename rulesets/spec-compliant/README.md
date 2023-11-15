@@ -7,7 +7,9 @@ Authors:
 ## What this does and why
 
 This ruleset uses the current built-in rules to stick closely to the spec.
+
 It's an unopinionated good default.
+
 REQUIRED rules (in the spec) are set to `error`, RECOMMENDED rules to `warn`.
 
 ## Code
