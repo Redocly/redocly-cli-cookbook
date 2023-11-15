@@ -1,4 +1,3 @@
-module.exports = ValidateMarkdown
 const markdownlint = require("markdownlint");
 const config = {
   // the list is here https://github.com/DavidAnson/markdownlint#rules--aliases
@@ -49,29 +48,32 @@ function ValidateMarkdown() {
         }
       }
     },
+   Tag: {
+      enter({ description }, ctx) {
+        if(description) {
+          return checkString(description, ctx);
+          
+        }
+      }
+    },
    Operation: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
+      enter({ description }, ctx) {
+        if(description) {
+          return checkString(description, ctx);
           
         }
       }
     },
    Parameter: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
-          
-        }
-      }
-    },
-    Tag: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
+      enter({ description }, ctx) {
+        if(description) {
+          return checkString(description, ctx);
           
         }
       }
     },
   }
 }
+
+module.exports = ValidateMarkdown
+
