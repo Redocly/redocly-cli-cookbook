@@ -33,7 +33,7 @@ This rule is built on the `markdownlint` library, so we need a `package.json` fi
 
 Make sure to install the dependency using your favorite package manager. For example I use `npm` so my installation command is:
 
-```
+```sh
 npm install
 ```
 
@@ -49,48 +49,50 @@ module.exports = {
       'validate': ValidateMarkdown,
     }
   }
-	
 }
 ```
 
 The rule itself is in `rule-validate-markdown.js`:
 
 ```js
-module.exports = ValidateMarkdown
 const markdownlint = require("markdownlint");
 const config = {
   // the list is here https://github.com/DavidAnson/markdownlint#rules--aliases
-  MD013: {line_length: 120},
+  MD013: { line_length: 120 },
   MD041: false, // first line should be h1
   MD047: false, // should end with newline
-}
+};
 
 function checkString(description, ctx) {
   let options = {
-    "strings": {
-      "desc": description
+    strings: {
+      desc: description,
     },
-    "config": config
+    config: config,
   };
   markdownlint(options, function callback(err, result) {
     if (!err) {
       // if there's no problem do nothing
-      if (result.desc.length) { // desc is the key in the options.strings object
+      if (result.desc.length) {
+        // desc is the key in the options.strings object
         let lines = description.split("\n");
 
         result.desc.forEach((desc) => {
           message = desc.ruleDescription;
           // add line number context for longer entries
-          if (desc.lineNumber > 1 ) {
-            message = message + " (near: " + lines[desc.lineNumber].substring(0,20) + "... )";
+          if (desc.lineNumber > 1) {
+            message =
+              message +
+              " (near: " +
+              lines[desc.lineNumber].substring(0, 20) +
+              "... )";
           }
 
           ctx.report({
             message: message,
-            location: ctx.location.child('description'),
+            location: ctx.location.child("description"),
           });
         });
-
       }
     }
   });
@@ -99,40 +101,38 @@ function checkString(description, ctx) {
 function ValidateMarkdown() {
   console.log("OpenAPI Markdown: validate");
   return {
-   Info: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
-          
+    Info: {
+      enter({ description }, ctx) {
+        if (description) {
+          return checkString(description, ctx);
         }
-      }
-    },
-   Operation: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
-          
-        }
-      }
-    },
-   Parameter: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
-          
-        }
-      }
+      },
     },
     Tag: {
-      enter(target, ctx) {
-        if(target["description"]) {
-          return checkString(target["description"], ctx);
-          
+      enter({ description }, ctx) {
+        if (description) {
+          return checkString(description, ctx);
         }
-      }
+      },
     },
-  }
+    Operation: {
+      enter({ description }, ctx) {
+        if (description) {
+          return checkString(description, ctx);
+        }
+      },
+    },
+    Parameter: {
+      enter({ description }, ctx) {
+        if (description) {
+          return checkString(description, ctx);
+        }
+      },
+    },
+  };
 }
+
+module.exports = ValidateMarkdown;
 ```
 
 To control the markdown validation rules in use, edit the config at the top of the file. 
@@ -141,7 +141,7 @@ Bring the plugin into your `redocly.yaml` file like this:
 
 ```yaml
 plugins:
-  - 'plugins/openapi-markdown.js'
+  - './openapi-markdown.js'
 
 rules:
   openapi-markdown/validate: warn
@@ -168,7 +168,7 @@ info:
 
 Linting (with `--format=stylish` for brevity) produces the following output:
 
-```
+```text
 validating museum.yaml...
 OpenAPI Markdown: validate
 museum.yaml:
