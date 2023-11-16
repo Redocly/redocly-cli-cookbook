@@ -25,6 +25,8 @@ If you come up with something new, please consider sharing it here by opening a 
 
 Combine existing [built-in rules](https://redocly.com/docs/cli/rules/built-in-rules/) in ways that serve a specific purpose, and make a [resuable ruleset](https://redocly.com/docs/cli/guides/configure-rules/#create-a-reusable-ruleset).
 
+- [Spec-compliant ruleset](rulesets/spec-compliant/)
+
 ### Configurable rules
 
 There are some fantastic examples of [configurable rules](https://redocly.com/docs/cli/rules/configurable-rules/) in the wild, we hope the list here inspires you to share more of your own!
