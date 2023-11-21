@@ -59,7 +59,7 @@ function updateExampleDates() {
 }
 ```
 
-It operates on the `Example`, `MediaType` and `Schema` nodes to cover the different ways of specifying examples (see the [specification](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#media-type-object)).
+It operates on the `Example`, `MediaType` and `Schema` nodes to cover the different ways of specifying examples.
 
 The `traverseAndReplaceWithComputedDateTime` function traverses the tree of nodes and replaces the values that contain the specific `$DateTimeNow` variable in examples with a computed datetime value:
 
@@ -123,3 +123,9 @@ paths:
 ```
 
 Please note that API descriptions are static text documents, so the dates will get updated only when the description gets bundled.
+
+## References
+
+- [Redocly docs on examples](https://redocly.com/docs/openapi-visual-reference/schemas/#example-and-examples)
+
+- [OpenAPI Specification on Media Type Objects](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#media-type-object)
