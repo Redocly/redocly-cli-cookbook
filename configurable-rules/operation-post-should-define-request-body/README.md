@@ -22,10 +22,10 @@ rules:
     where:
       - subject:
           type: PathItem
-          matchParentKeys: /^([\w-\{\}/.](?<!/actions))*$/ 
-          # here you can define your own uri pattern to ignore if providing a requestBody is not required.
+          # Here you can define your own URI pattern to ignore if providing a requestBody is not required.
           # The negation happens in this portion of the regex `(?<!/actions)`.
-          # The regex takes the entire uri pattern string and then uses a "negative lookbehind" from the end of the string to find the pattern to be negated.
+          # The regex takes the entire URI pattern string and then uses a "negative lookbehind" from the end of the string to find the pattern to be negated.
+          matchParentKeys: /^([\w-\{\}/.](?<!/actions))*$/
         assertions:
           defined: true
       - subject:
