@@ -4,13 +4,8 @@ rules:
     message: '"DELETE" SHOULD NOT define a "requestBody" schema'
     subject:
       type: Operation
-    where:
-      - subject:
-          type: Operation
-          filterInParentKeys:
-            - delete
-        assertions:
-          defined: true
+      filterInParentKeys:
+        - delete
     assertions:
       disallowed:
         - requestBody

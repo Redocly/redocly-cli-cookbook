@@ -19,13 +19,8 @@ rules:
     message: '"DELETE" SHOULD NOT define a "requestBody" schema'
     subject:
       type: Operation
-    where:
-      - subject:
-          type: Operation
-          filterInParentKeys:
-            - delete
-        assertions:
-          defined: true
+      filterInParentKeys:
+        - delete
     assertions:
       disallowed:
         - requestBody
@@ -55,7 +50,7 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
+      requestBody: # <-- This will error
         description: a request body for my delete operation
         content:
           'application/json':

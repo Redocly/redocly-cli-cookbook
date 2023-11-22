@@ -6,7 +6,7 @@ Authors:
 
 ## What this does and why
 
-Following the HTTP standard and RESTful api principles, a `POST` request SHOULD include a `requestBody` indicating the contents of the request to the server. In some cases, when using a command pattern (`/actions/{action-id}`), you may allow a `requestBody` to be omitted; this rule provides for the option to ignore a particular uri pattern. The other constraint on this rule is the `deprecated` property should not be defined to avoid linting deprecated endpoints, unnecessarily.
+Following the HTTP standard and RESTful API principles, a `POST` request SHOULD include a `requestBody` indicating the contents of the request to the server. In some cases, when using a command pattern (`/actions/{action-id}`), you may allow a `requestBody` to be omitted; this rule provides for the option to ignore a particular uri pattern. The other constraint on this rule is the `deprecated` property should not be defined to avoid linting deprecated endpoints, unnecessarily.
 
 ## Code
 
@@ -40,7 +40,7 @@ rules:
         - requestBody
 ```
 
-This rule will error if any uri pattern, other than the ignored pattern, includes a POST request without the `requestBody` schema definition.
+This rule will error if any URI pattern, other than the ignored pattern, includes a `POST` request without the `requestBody` schema definition.
 Note the `where` section is used to filter the rule to only apply to `POST`, non-`deprecated`, and optionally ignored uri patterns.
 
 ## Examples

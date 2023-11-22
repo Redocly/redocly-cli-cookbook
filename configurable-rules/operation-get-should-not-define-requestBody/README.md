@@ -19,13 +19,8 @@ rules:
     message: '"GET" SHOULD NOT define a "requestBody" schema'
     subject:
       type: Operation
-    where:
-      - subject:
-          type: Operation
-          filterInParentKeys:
-            - get
-        assertions:
-          defined: true
+      filterInParentKeys:
+        - get
     assertions:
       disallowed:
         - requestBody
@@ -55,7 +50,7 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
+      requestBody: # <- This will error
         description: a request body for my get operation
         content:
           'application/json':
