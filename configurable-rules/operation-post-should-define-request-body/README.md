@@ -41,13 +41,13 @@ rules:
 ```
 
 This rule will error if any URI pattern, other than the ignored pattern, includes a `POST` request without the `requestBody` schema definition.
-Note the `where` section is used to filter the rule to only apply to `POST`, non-`deprecated`, and optionally ignored uri patterns.
+Note the `where` section is used to filter the rule to only apply to `POST`, non-`deprecated`, and optionally ignored URI patterns.
 
 ## Examples
 
 Here's a sample of an OpenAPI description:
 
-Only one error is expected from this example because the second uri includes the `/actions` pattern ignored by the rule.
+Only one error is expected from this example because the second URI includes the `/actions` pattern ignored by the rule.
 
 ```yaml
 openapi: 3.0.3
