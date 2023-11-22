@@ -28,7 +28,6 @@ rules:
 ```
 
 This rule will warn if any `PathItem` includes a `DELETE` operation with a `requestBody` schema definition.
-Note the `where` section is used to filter the rule to only apply to `DELETE` operations
 
 ## Examples
 
