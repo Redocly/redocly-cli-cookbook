@@ -1,4 +1,4 @@
-# Decorator to substitute date templates in an API description
+# Substitute datetime placeholders in an API description
 
 Authors:
 
@@ -6,14 +6,16 @@ Authors:
 
 ## What this does and why
 
-When rendering an API description it might be useful to use current dates in examples.
-Let's say, we want to use a special datetime template, like `$DateTimeNow + 10 days` where the `$DateTimeNow` variable stands for the current date. Also, let's use only the `+` operator for the sake of simplicity.
+When an API description includes datetime values, it's nice if they present soon or realistic date values.
+This decorator provides the functionality to replace a special datetime placeholder, `$DateTimeNow`, with the current date and time when bundling the API description.
+You can also use expressions to add a set number of days to the value, for example `$DateTimeNow + 10 days`.
 
-This decorator provides functionality to substitute the basic date templates with the actual values when bundling an API description.
+> [!WARNING]
+> Placeholders aren't supported by all OpenAPI tools. Using this approach, you should bundle your OpenAPI to apply the decorators before passing the API description to other tools.
 
 ## Code
 
-The `date-time` plugin only defines the `decorator` section and the plugin `id`:
+The `dates-plugin` plugin defines the `decorator` section and the plugin `id`:
 
 ```javascript
 const updateExampleDates = require("./decorator");
@@ -28,7 +30,7 @@ module.exports = {
 };
 ```
 
-Here's the main part of the decorator:
+Here's the main part of the decorator (from `decorator.js`):
 
 ```javascript
 function updateExampleDates() {
@@ -59,7 +61,7 @@ function updateExampleDates() {
 }
 ```
 
-It operates on the `Example`, `MediaType` and `Schema` nodes to cover the different ways of specifying examples.
+The decorator operates on the `Example`, `MediaType` and `Schema` nodes to cover the different ways of specifying examples.
 
 The `traverseAndReplaceWithComputedDateTime` function traverses the tree of nodes and replaces the values that contain the specific `$DateTimeNow` variable in examples with a computed datetime value:
 
@@ -78,7 +80,7 @@ function traverseAndReplaceWithComputedDateTime(value) {
 }
 ```
 
-In this example we'll consider a very basic datetime calculator that can only add days to the current date, but it should be enough to illustrate the idea:
+The `computeDateTemplate` function is a very basic datetime calculator that can only add days to the current date, but it illustrates the idea and you can extend it to meet your own specific needs:
 
 ```javascript
 function computeDateTemplate(template) {
@@ -105,7 +107,7 @@ decorators:
   dates-plugin/update-example-dates: on
 ```
 
-Given the following API description, the decorator will replace `$DateTimeNow` with the current date and `$DateTimeNow + 7d` with the date in a week:
+Given the following API description, the decorator will replace `$DateTimeNow` with the current date and `$DateTimeNow + 7d` with the date a week from now:
 
 ```yaml
 openapi: 3.1.0
@@ -126,6 +128,6 @@ Please note that API descriptions are static text documents, so the dates will g
 
 ## References
 
-- [Redocly docs on examples](https://redocly.com/docs/openapi-visual-reference/schemas/#example-and-examples)
+- [Redocly documentation on examples in OpenAPI](https://redocly.com/docs/openapi-visual-reference/schemas/#example-and-examples)
 
 - [OpenAPI Specification on Media Type Objects](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#media-type-object)
