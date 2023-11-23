@@ -43,6 +43,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 - [Tag sorting](./custom-plugin-decorators/tag-sorting) - put your tags list in alphabetical order.
 
+- [Substitute datetime placeholders in an API description](./custom-plugin-decorators/update-example-dates) - update dates in examples to the current date.
+
 #### Rules (for custom plugins)
 
 - [Validate Markdown](./custom-plugin-rules/markdown-validator) - check Markdown in description fields is valid.
