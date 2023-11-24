@@ -1,3 +1,6 @@
+extends:
+- https://raw.githubusercontent.com/Redocly/redocly-cli-cookbook/main/rulesets/spec-compliant/redocly.yaml 
+
 rules:
   no-server-example.com: warn
   no-server-trailing-slash: warn
