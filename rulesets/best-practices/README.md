@@ -6,7 +6,7 @@ Authors:
 
 ## What this does and why
 
-This ruleset combines unopinionated, "best practices" rules.
+This ruleset combines unopinionated, "best practices" rules with the spec-compliant ruleset.
 
 They are useful without adding too much noise in most cases, and prevent oversights.
 
@@ -15,6 +15,9 @@ They are useful without adding too much noise in most cases, and prevent oversig
 You can use it in your `redocly.yaml` wih [`extends`](https://redocly.com/docs/cli/configuration/extends/), or you can copy its content directly:
 
 ```yaml
+extends:
+- https://raw.githubusercontent.com/Redocly/redocly-cli-cookbook/main/rulesets/spec-compliant/redocly.yaml 
+
 rules:
   no-server-example.com: warn
   no-server-trailing-slash: warn
