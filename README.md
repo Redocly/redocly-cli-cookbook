@@ -34,6 +34,9 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [Ban certain words from descriptions](configurable-rules/description-banned-words/)
 - [Require `items` field for schemas of type `array`](configurable-rules/required-items-for-array-schemas/)
 - [Ensure sentence case in operation summaries](configurable-rules/operation-summary-sentence-case)
+- [`POST` SHOULD define `requestBody` schema](configurable-rules/operation-post-should-define-request-body/)
+- [`GET` SHOULD NOT define `requestBody` schema](configurable-rules/operation-get-should-not-define-requestBody/)
+- [`DELETE` SHOULD NOT define `requestBody` schema](configurable-rules/operation-delete-should-not-define-requestBody/)
 
 ### Custom plugins
 
