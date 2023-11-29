@@ -48,6 +48,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 - [Substitute datetime placeholders in an API description](./custom-plugin-decorators/update-example-dates) - update dates in examples to the current date.
 
+- [OpenAI isConsequential](./custom-plugin-decorators/openai-is-consequential) - add `x-openai-isConsequential: true` specification extension to GET operations.
+
 #### Rules (for custom plugins)
 
 - [Validate Markdown](./custom-plugin-rules/markdown-validator) - check Markdown in description fields is valid.
