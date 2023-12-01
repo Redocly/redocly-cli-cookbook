@@ -1,0 +1,8 @@
+rules:
+  rule/info-description:
+    subject:
+      type: Info
+      property: description
+    assertions:
+      defined: true
+
