@@ -52,6 +52,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 - [OpenAI isConsequential](./custom-plugin-decorators/openai-is-consequential) - add `x-openai-isConsequential: true` specification extension to GET operations.
 
+- [Remove extensions](./custom-plugin-decorators/remove-extensions) - remove any given [OpenAPI Extensions](https://swagger.io/docs/specification/openapi-extensions/) from an OpenAPI document.
+
 #### Rules (for custom plugins)
 
 - [Validate Markdown](./custom-plugin-rules/markdown-validator) - check Markdown in description fields is valid.
