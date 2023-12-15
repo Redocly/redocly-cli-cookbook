@@ -38,6 +38,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [`GET` SHOULD NOT define `requestBody` schema](configurable-rules/operation-get-should-not-define-requestBody/)
 - [`DELETE` SHOULD NOT define `requestBody` schema](configurable-rules/operation-delete-should-not-define-requestBody/)
 - [Info section must have a description](configurable-rules/info-description)
+- [No `<script>` tags in descriptions](configurable-rules/no-script)
 
 ### Custom plugins
 
