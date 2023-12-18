@@ -39,7 +39,7 @@ rules:
 
 ## References
 
-As explained in [that issue](https://github.com/Redocly/redocly-cli/issues/1331), here is why each rule is included:
+Here is why each rule is included:
 
 - `spec`: [obviously](https://redocly.com/docs/cli/rules/spec/#api-design-principles)
 - `spec-strict-refs`: ["strict adherence to the specifications"](https://redocly.com/docs/cli/rules/spec-strict-refs/#api-design-principles)
@@ -59,4 +59,4 @@ As explained in [that issue](https://github.com/Redocly/redocly-cli/issues/1331)
 - `no-unresolved-refs` (debatable): ["The referenced structure MUST be in the form of a Path Item Object."](https://spec.openapis.org/oas/latest.html#fixed-fields-6)
 - `spec-components-invalid-map-name`: ["All the fixed fields declared above are objects that MUST use keys that match the regular expression: ^\[a-zA-Z0-9\.\-_\]+$."](https://spec.openapis.org/oas/latest.html#fixed-fields-5)
 
-Please, feel free to comment in the [corresponding issue](https://github.com/Redocly/redocly-cli/issues/1331) if you have elements against the debatable rules.
+Please, feel free to open issues or pull requests to suggest updates or additions to this ruleset.

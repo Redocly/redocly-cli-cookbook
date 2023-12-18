@@ -1,4 +1,4 @@
-# Best practices ruleset
+# Spot common mistakes
 
 Authors:
 - `@CidTori`
@@ -6,18 +6,13 @@ Authors:
 
 ## What this does and why
 
-This ruleset combines unopinionated, "best practices" rules with the spec-compliant ruleset.
-
-They are useful without adding too much noise in most cases, and prevent oversights.
+This ruleset combines unopinionated rules to identify common mistakes and avoid oversights. The ruleset works well in combination with the [spec-compliant ruleset](../spec-compliant/).
 
 ## Code
 
 You can use it in your `redocly.yaml` wih [`extends`](https://redocly.com/docs/cli/configuration/extends/), or you can copy its content directly:
 
 ```yaml
-extends:
-- https://raw.githubusercontent.com/Redocly/redocly-cli-cookbook/main/rulesets/spec-compliant/redocly.yaml 
-
 rules:
   no-server-example.com: warn
   no-server-trailing-slash: warn
@@ -30,7 +25,7 @@ rules:
 
 ## References
 
-As explained in [that issue](https://github.com/Redocly/redocly-cli/issues/1331), here is why each rule is included:
+Here is why each rule is included:
 
 - `no-server-example.com`: most likely a copy-paste error from some example in a documentation
 - `no-server-trailing-slash`: prevents double slash between the server and the endpoint path, no downside
@@ -40,4 +35,4 @@ As explained in [that issue](https://github.com/Redocly/redocly-cli/issues/1331)
 - `no-enum-type-mismatch`: as the rule itself says: "Lack of compliance is most likely the result of a typo."
 - `no-unused-components`: unused components are hard to spot without a linter, and most of the time you just want to remove them
 
-Please, feel free to comment in the [corresponding issue](https://github.com/Redocly/redocly-cli/issues/1331) if you have elements against some of these rules.
+Please, feel free to open issues or pull requests to suggest updates or additions to this ruleset.
