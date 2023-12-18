@@ -6,24 +6,18 @@ Authors:
 
 ## What this does and why
 
-Go through each node of an OpenAPI document, and remove any given [OpenAPI Extensions](https://swagger.io/docs/specification/openapi-extensions/) (must start with `x-`).
+Go through each node of an OpenAPI document, and remove any given [OpenAPI Extensions](https://spec.openapis.org/oas/v3.1.0#specification-extensions) (must start with `x-`).
 
-Why? See https://github.com/Redocly/redocly-cli/issues/867#issuecomment-1816872180
+Why? See <https://github.com/Redocly/redocly-cli/issues/867#issuecomment-1816872180>
 
 ## Code
 
-<!-- add your rule, plugin, or other item in code blocks here. Add words to describe what each part does -->
+The plugin itself can be found in [`remove-extensions.js'](./remove-extensions.js). The rest of this section shows you how to set up and use the plugin.
 
-In the directory where you want to run `redocly` run the following command:
-
-```bash
-mkdir plugins && git clone git@github.com:Redocly/redocly-cli-cookbook.git
-```
-
-Then create/edit a `plugins/plugin.js` file as follows:
+Create a `plugin.js` file to refer to this file:
 
 ```js
-const RemoveExtensions = require("./redocly-cli-cookbook/custom-plugin-decorators/remove-extensions");
+const RemoveExtensions = require("./remove-extensions");
 const id = "plugin";
 
 /** @type {import('@redocly/cli').DecoratorsConfig} */
@@ -39,7 +33,7 @@ module.exports = {
 };
 ```
 
-Finally create/edit `redocly.yaml` as follows (edit with your own settings):
+Create/edit `redocly.yaml` as follows (edit with your own settings):
 
 ```yml
 apis:
@@ -53,11 +47,14 @@ apis:
           - x-amazon*
           - x-google*
 plugins:
-  - "./plugins/plugin.js"
+  - "./plugin.js"
 ```
 
-This will remove all your [GCP](https://cloud.google.com/endpoints/docs/openapi/openapi-extensions) and [AWS](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html) custom OpenAPI extensions.
+Run the `bundle` command to remove all the [GCP](https://cloud.google.com/endpoints/docs/openapi/openapi-extensions) and [AWS](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html) custom OpenAPI extensions from the OpenAPI description:
 
+```bash
+redocly bundle with-plugin@latest --output dist/with-plugin.yaml
+```
 The `extensions` parameter is optional. If empty or not set, it will remove all extensions (elements starting with `x-`). The accepted values for the `extensions` param are:
 
 - `extensions: <regex-valid-extension>`
@@ -66,23 +63,6 @@ The `extensions` parameter is optional. If empty or not set, it will remove all 
 
 Regular expressions follow [Javascript Regex convention](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 
-At this point, your file tree should look like this:
-
-- project-directory/
-  - redocly.yaml
-  - plugins/
-    - plugin.js
-    - redocly-cli-cookbook
-      - ... content of this repo
-    - ... your own plugins?
-
-Finally, use the plugin by running the following command:
-
-```bash
-redocly bundle with-plugin@latest --output dist/with-plugin.yaml
-```
-
-`dist/with-plugin.yaml` will contain the same OpenAPI without the `x-amazon*` and `x-google*` properties.
 
 ## Examples
 
