@@ -8,7 +8,7 @@ Every item added to this repository belongs in its own directory. Identify which
 
 For example, to add a configurable rule that makes sure every endpoint is tagged "cupcake" (an imaginary example):
 
-```
+```text
 .
 ├── configurable-rules
 │   └── endpoints-are-tagged-cupcake
@@ -24,7 +24,7 @@ Put the file or files that you want to share into your new directory. Try to nam
 
 Copy the `readme-template.md` from the root of the project into your new directory, and name it `README.md`. Edit and complete this file - this is required for your contribution to be added to our collection. Your directory structure should look like this:
 
-```
+```text
 .
 ├── configurable-rules
 │   └── endpoints-are-tagged-cupcake

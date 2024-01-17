@@ -5,7 +5,7 @@ Authors:
  
 ## What this does and why
 
-Redocly CLI has the [`tags-alphabetical'](https://redocly.com/docs/cli/rules/tags-alphabetical/) rule to error if the `tags` section isn't in alphabetical order by `name`.
+Redocly CLI has the [`tags-alphabetical`](https://redocly.com/docs/cli/rules/tags-alphabetical/) rule to error if the `tags` section isn't in alphabetical order by `name`.
 
 This decorator provides functionality to _put_ the tags in order by name, in order to make any API description compatible with that rule.
 
@@ -24,7 +24,6 @@ module.exports = {
       'alphabetical': SortTagsAlphabetically,
     }
   }
-	
 }
 ```
 
