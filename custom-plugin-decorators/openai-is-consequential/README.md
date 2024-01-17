@@ -8,7 +8,7 @@ Authors:
 
 OpenAI Actions uses OpenAPI to enable GPTs to make API calls.
 
-It has support for a [consequential flag](https://platform.openai.com/docs/actions/consequential-flag):
+It has support for a consequential flag (documentation no longer available, but originally at `https://platform.openai.com/docs/actions/consequential-flag`):
 
 > If the field isn't present, we default all GET operations to false and all other operations to true
 
@@ -113,5 +113,4 @@ Here is an example of an operation before and after:
 
 ## References
 
-- [`x-openai-isConsequential' flag](https://platform.openai.com/docs/actions/consequential-flag)
 - The [`PathItem` types documentation](https://redocly.com/docs/openapi-visual-reference/path-item/#types)
