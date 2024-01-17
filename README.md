@@ -51,7 +51,7 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 - [Substitute datetime placeholders in an API description](./custom-plugin-decorators/update-example-dates) - update dates in examples to the current date.
 - [OpenAI isConsequential](./custom-plugin-decorators/openai-is-consequential) - add `x-openai-isConsequential: true` specification extension to GET operations.
 - [Remove extensions](./custom-plugin-decorators/remove-extensions) - remove any given [OpenAPI Extensions](https://spec.openapis.org/oas/v3.1.0#specification-extensions) from an OpenAPI document.
-- [Remove unused tags](./custom-plugin-decorators/remove-unusted-tags) - remove tags that are declared but not used by any operations.
+- [Remove unused tags](./custom-plugin-decorators/remove-unused-tags) - remove tags that are declared but not used by any operations.
 
 #### Rules (for custom plugins)
 
