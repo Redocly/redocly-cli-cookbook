@@ -45,4 +45,4 @@ paths:
 
 ## References
 
-Built-in [`no-http-verbs-in-paths` rule](https://redocly.com/docs/cli/rules/no-http-verbs-in-paths/#no-http-verbs-in-paths) .
+Built-in [`no-http-verbs-in-paths` rule](https://redocly.com/docs/cli/rules/no-http-verbs-in-paths/#no-http-verbs-in-paths).
