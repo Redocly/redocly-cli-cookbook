@@ -1,0 +1,5 @@
+plugins:
+  - refs-plugin.js
+rules: 
+  refs-plugin/no-refs-siblings: warn
+  refs-plugin/no-circular-refs: warn
