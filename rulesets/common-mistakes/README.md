@@ -10,7 +10,7 @@ This ruleset combines unopinionated rules to identify common mistakes and avoid 
 
 ## Code
 
-You can use it in your `redocly.yaml` wih [`extends`](https://redocly.com/docs/cli/configuration/extends/), or you can copy its content directly:
+You can use it in your `redocly.yaml` with [`extends`](https://redocly.com/docs/cli/configuration/extends/), or you can copy its content directly:
 
 ```yaml
 rules:
