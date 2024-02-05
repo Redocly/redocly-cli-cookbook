@@ -21,20 +21,20 @@ function checkString(description, ctx) {
       // desc is the key in the options.strings object
       let lines = description.split("\n");
 
-      lintResults.desc.forEach((desc) => {
+      for (const desc of lintResults.desc){
         // grab error message
         let message = desc.ruleDescription;
         // add line number context for longer entries
         if (desc.lineNumber > 1) {
           const charsByError = lines[desc.lineNumber].substring(0, 20);
-          message = `${message} (near: ${charsByError}...)`
+          message = `${message} (near: ${charsByError} ...)`
         }
 
         ctx.report({
           message: message,
           location: ctx.location.child("description"),
         });
-      })
+      }
     }
   } catch (error) {
     console.log(error);
