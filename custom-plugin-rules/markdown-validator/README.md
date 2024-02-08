@@ -70,32 +70,32 @@ function checkString(description, ctx) {
     },
     config: config,
   };
-  markdownlint(options, function callback(err, result) {
-    if (!err) {
-      // if there's no problem do nothing
-      if (result.desc.length) {
-        // desc is the key in the options.strings object
-        let lines = description.split("\n");
 
-        result.desc.forEach((desc) => {
-          message = desc.ruleDescription;
-          // add line number context for longer entries
-          if (desc.lineNumber > 1) {
-            message =
-              message +
-              " (near: " +
-              lines[desc.lineNumber].substring(0, 20) +
-              "... )";
-          }
+  try {
+    const lintResults = markdownlint.sync(options);
+    
+    if (lintResults.desc.length) {
+      // desc is the key in the options.strings object
+      let lines = description.split("\n");
 
-          ctx.report({
-            message: message,
-            location: ctx.location.child("description"),
-          });
+      for (const desc of lintResults.desc) {
+        // grab error message
+        let message = desc.ruleDescription;
+        // add line number context for longer entries
+        if (desc.lineNumber > 1) {
+          const charsByError = lines[desc.lineNumber].substring(0, 20);
+          message = `${message} (near: ${charsByError} ...)`
+        }
+
+        ctx.report({
+          message: message,
+          location: ctx.location.child("description"),
         });
       }
     }
-  });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function ValidateMarkdown() {
