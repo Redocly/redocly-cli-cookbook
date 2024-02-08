@@ -21,7 +21,7 @@ function checkString(description, ctx) {
       // desc is the key in the options.strings object
       let lines = description.split("\n");
 
-      for (const desc of lintResults.desc){
+      for (const desc of lintResults.desc) {
         // grab error message
         let message = desc.ruleDescription;
         // add line number context for longer entries
