@@ -26,7 +26,8 @@ function checkString(description, ctx) {
         let message = desc.ruleDescription;
         // add line number context for longer entries
         if (desc.lineNumber > 1) {
-          const charsByError = lines[desc.lineNumber].substring(0, 20);
+          // computer counts from zero, humans count from 1
+          const charsByError = lines[desc.lineNumber - 1].substring(0, 20);
           message = `${message} (near: ${charsByError} ...)`
         }
 
