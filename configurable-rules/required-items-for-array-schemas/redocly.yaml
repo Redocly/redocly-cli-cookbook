@@ -11,4 +11,5 @@ rules:
           property: type
         assertions:
           const: array
+          defined: true
     message: The 'items' field is required for schemas of array type.

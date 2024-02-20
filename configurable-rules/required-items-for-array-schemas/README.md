@@ -30,11 +30,13 @@ rules:
           property: type
         assertions:
           const: array
+          defined: true
     message: The 'items' field is required for schemas of array type.
 ```
 
 This rule will error if an array is declared without an `items` field.
-Note how the `where` section is used to filter the rule to only apply to schemas of type `array`.
+The `where` section is used to filter the rule to only apply to schemas of type `array`.
+Note the `defined: true` assertion, which ensures that the `type` field is defined.
 
 ## Examples
 
