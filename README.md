@@ -41,6 +41,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [Info section must have a description](configurable-rules/info-description)
 - [No `<script>` tags in descriptions](configurable-rules/no-script)
 - [Paths should not match a pattern](configurable-rules/path-excludes-pattern/)
+- [API healthcheck rules](configurable-rules/api-health/)
 
 ### Custom plugins
 
