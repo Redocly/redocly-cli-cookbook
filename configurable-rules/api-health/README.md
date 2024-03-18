@@ -6,12 +6,13 @@ Authors:
 
 ## What this does and why
 
-Implements configurable rules to check that:
+This set of configurable rules checks that an API conforms to expected health check standards.
+Three rules are included and they check the following:
 - `/health` endpoint is defined
-- The response uses the `application/health+json` media type
+- The `200` response uses the `application/health+json` media type
 - The response contains the mandatory `status` property
 
-Source: https://datatracker.ietf.org/doc/html/draft-inadarei-api-health-check-06
+Source: [Proposed Health Check Response Format for HTTP APIs](https://datatracker.ietf.org/doc/html/draft-inadarei-api-health-check-06).
 
 ## Code
 
