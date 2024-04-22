@@ -6,9 +6,9 @@ Authors:
 ## What this does and why
 
 This catches common misconfigurations of JSON Schema:
-- defining minimum or maximum values for a string (these are more logical for a number)
-- defining items on an object (instead of an array)
-- defining properties on an array (instead of items)
+- disallows `minimum` or `maximum` values for a string (these are more logical for a number)
+- disallows `items` on an object (instead of an array)
+- disallows `properties` on an array (instead of items)
 
 ## Code
 
@@ -17,9 +17,6 @@ The first rule checks that a string isn't using the `minimum` and `maximum` keyw
   rule/json-schema-string-misconfiguration:
     subject: 
       type: Schema
-      property: 
-        - minimum
-        - maximum
     where: 
       - subject: 
           type: Schema
@@ -27,7 +24,9 @@ The first rule checks that a string isn't using the `minimum` and `maximum` keyw
         assertions:  
           const: string
     assertions: 
-      defined: false
+      disallowed: 
+        - minimum
+        - maximum
 ```
 
 The second rule checks that an array isn't using the `properties` keyword.
@@ -44,7 +43,8 @@ The second rule checks that an array isn't using the `properties` keyword.
         assertions:  
           const: array
     assertions: 
-      defined: false
+      disallowed: 
+        - properties
 ```
 
 The third rule checks that an object isn't using the `items` keyword.
@@ -52,8 +52,6 @@ The third rule checks that an object isn't using the `items` keyword.
   rule/json-schema-object-misconfiguration:
     subject: 
       type: Schema
-      property: 
-        - items
     where: 
       - subject: 
           type: Schema
@@ -61,7 +59,8 @@ The third rule checks that an object isn't using the `items` keyword.
         assertions:  
           const: object
     assertions: 
-      defined: false
+      disallowed:  
+        - items
 ```
 
 ## Examples
