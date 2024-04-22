@@ -1,21 +1,32 @@
 openapi: 3.1.0
 info: 
-  title: Unintended schema misconfigurations
+  title: For testing strict string definitions
   version: 1.0.0
 paths: {}
 components: 
   schemas: 
 
+    LuckyNumber: # should not be caught be these rules
+      type: integer
+
     BadString:
       type: string
 
+    BadStringWithMinLength:
+      type: string
+      minLength: 1
+
+    BadStringWithMaxLength:
+      type: string
+      maxLength: 64
+    
     GoodStringBecauseEnum:
       type: string
       enum:
         - ABC
         - DEF
         - GHI
-        
+
     GoodStringBecauseMinAndMaxLength:
       type: string
       minLength: 1
