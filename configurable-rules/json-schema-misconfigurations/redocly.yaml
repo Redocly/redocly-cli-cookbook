@@ -15,8 +15,6 @@ rules:
   rule/json-schema-array-misconfiguration:
     subject: 
       type: Schema
-      property: 
-        - properties
     where: 
       - subject: 
           type: Schema
@@ -26,7 +24,6 @@ rules:
     assertions: 
       disallowed: 
         - properties
-        - foo
   rule/json-schema-object-misconfiguration:
     subject: 
       type: Schema
@@ -39,4 +36,3 @@ rules:
     assertions: 
       disallowed:  
         - items
-        - foo

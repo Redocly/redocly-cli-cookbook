@@ -34,8 +34,6 @@ The second rule checks that an array isn't using the `properties` keyword.
   rule/json-schema-array-misconfiguration:
     subject: 
       type: Schema
-      property: 
-        - properties
     where: 
       - subject: 
           type: Schema
