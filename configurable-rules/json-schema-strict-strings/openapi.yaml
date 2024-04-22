@@ -1,0 +1,22 @@
+openapi: 3.1.0
+info: 
+  title: Unintended schema misconfigurations
+  version: 1.0.0
+paths: {}
+components: 
+  schemas: 
+
+    BadString:
+      type: string
+
+    GoodStringBecauseEnum:
+      type: string
+      enum:
+        - ABC
+        - DEF
+        - GHI
+        
+    GoodStringBecauseMinAndMaxLength:
+      type: string
+      minLength: 1
+      maxLength: 64

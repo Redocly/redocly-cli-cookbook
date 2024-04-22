@@ -1,0 +1,19 @@
+rules:
+  rule/json-schema-string-has-min-and-max-length:
+    subject: 
+      type: Schema
+    where: 
+      - subject: 
+          type: Schema
+          property: type
+        assertions:  
+          const: string
+      - subject: 
+          type: Schema
+          property: enum
+        assertions: 
+          defined: false        
+    assertions: 
+      required: 
+        - minLength
+        - maxLength
