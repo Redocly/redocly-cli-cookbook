@@ -43,6 +43,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [Paths should not match a pattern](configurable-rules/path-excludes-pattern/)
 - [API healthcheck rules](configurable-rules/api-health/)
 - [String schemas length defined](configurable-rules/string-schemas-length-defined/)
+- [JSON Schema misconfigurations](configurable-rules/json-schema-misconfigurations/)
 
 ### Custom plugins
 

@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info: 
+  title: Unintended schema misconfigurations
+  version: 1.0.0
+paths: {}
+components: 
+  schemas: 
+
+    BadString:
+      type: string
+      minimum: 5
+      maximum: 10
+
+    GoodNumber:
+      type: number
+      minimum: 5
+      maximum: 10
+        
+    GoodString:
+      type: string
+      minLength: 5
+      maxLength: 10
+  
+    BadObject:
+      type: object
+      items: 
+        type: string
+    
+    GoodObject:
+      type: object
+      properties:
+        foo:
+          $ref: "#/components/schemas/GoodString"
+    
+    BadArray:
+      type: array
+      properties: 
+        foo:
+          $ref: "#/components/schemas/GoodString"
