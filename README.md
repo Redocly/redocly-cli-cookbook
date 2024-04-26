@@ -42,6 +42,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [No `<script>` tags in descriptions](configurable-rules/no-script)
 - [Paths should not match a pattern](configurable-rules/path-excludes-pattern/)
 - [API healthcheck rules](configurable-rules/api-health/)
+- [String schemas length defined](configurable-rules/string-schemas-length-defined/)
 
 ### Custom plugins
 
