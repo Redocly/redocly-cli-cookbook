@@ -44,6 +44,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [API healthcheck rules](configurable-rules/api-health/)
 - [String schemas length defined](configurable-rules/string-schemas-length-defined/)
 - [JSON Schema misconfigurations](configurable-rules/json-schema-misconfigurations/)
+- [Azure APIM unsupported keywords](configurable-rules/azure-apim-unsupported-keyword/)
 
 ### Custom plugins
 
