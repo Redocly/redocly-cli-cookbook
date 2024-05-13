@@ -97,7 +97,7 @@ The next two rules ensure external docs and info summary aren't used.
       property: summary
     assertions: 
       defined: false
-    message: Azure APIM does not Info summary.
+    message: Azure APIM does not support Info summary.
 ```
 
 APIM ignores security. This rule let's you know if it is left in there:
