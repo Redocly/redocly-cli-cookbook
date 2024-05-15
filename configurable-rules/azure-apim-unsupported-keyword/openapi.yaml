@@ -7,7 +7,7 @@ info:
   summary: Azure APIM test
   version: 1.0.0
   
-security: []
+security: [] # violates rule/security-ignored-azure-apim, should not be defined
 servers: 
   - url: https://foo.bar
   - url: baz.qux 

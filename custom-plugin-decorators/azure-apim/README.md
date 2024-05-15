@@ -20,46 +20,8 @@ Contribute to this community cookbook by adding decorators for issues you find w
 
 ## Code
 
-The code is entirely in `azure-apim.js`:
+The code is entirely in [azure-apim.js](./azure-apim.js).
 
-```javascript
-module.exports = {
-    id: "azure-apim",
-    decorators: {
-      oas3: {
-        "remove-examples": RemoveExamples,
-      },
-    },
-  };
-  
-  /** @type {import('@redocly/cli').OasDecorator} */
-  function RemoveExamples() {
-    return {
-      Schema: {
-        leave(Schema) {
-          if (Schema['examples']) {
-            delete Schema['examples'];
-          }
-        }
-      },
-      MediaType: {
-        leave(MediaType) {
-            if (MediaType['examples']) {
-                delete MediaType['examples'];
-            }
-        }
-      },
-      Components: {
-        leave(Components) {
-          if (Components['examples']) {
-            delete Components['examples'];
-          }
-        }
-      }
-    }
-  };
-
-```
 
 The code sets the plugin name to `azure-apim` and adds a decorator named `remove-examples`.
 
