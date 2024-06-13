@@ -1,0 +1,89 @@
+openapi: 3.1.0
+externalDocs: 
+  url: example.com
+  
+info: 
+  title: Azure APIM test case.
+  summary: Azure APIM test
+  version: 1.0.0
+  
+security: [] # violates rule/security-ignored-azure-apim, should not be defined
+servers: 
+  - url: https://foo.bar
+  - url: baz.qux 
+paths:
+  /trucks:
+    post: 
+      operationId: create-trucks
+      summary: Create a truck
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Truck"
+      responses: 
+        '201':
+          description: CREATED
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Truck"
+    get: 
+      operationId: get-trucks
+      summary: List trucks
+      externalDocs: 
+        url: example.com
+        
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/Truck"
+      responses: 
+        '200':
+          description: OK
+          content:
+            application/json:
+              # invalid because not using ref for the whole schema.
+              schema: 
+                type: array
+                items:
+                  - $ref: "#/components/schemas/Truck"
+
+  /scooters:
+    post: 
+      operationId: create-scooters
+      summary: Create a scooter
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+      responses: 
+        '200':
+          description: OK
+          content: 
+            application/json:
+              type: object
+              properties:
+                name:
+                  type: string
+
+components: 
+  schemas: 
+    Truck:
+      type: object
+      properties:
+        weight:
+          type: number
+        length:
+          type: number
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: number
