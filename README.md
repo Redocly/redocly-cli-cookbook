@@ -58,6 +58,7 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 - [Remove extensions](./custom-plugin-decorators/remove-extensions) - remove any given [OpenAPI Extensions](https://spec.openapis.org/oas/v3.1.0#specification-extensions) from an OpenAPI document.
 - [Remove unused tags](./custom-plugin-decorators/remove-unused-tags) - remove tags that are declared but not used by any operations.
 - [Azure APIM](./custom-plugin-decorators/azure-apim) - remove features unsupported by Azure APIM such as examples.
+- [Swap summary and description](./custom-plugin-decorators/swap-summary-description) - swap the contents of summary and description fields if they are the wrong way round.
 
 #### Rules (for custom plugins)
 
