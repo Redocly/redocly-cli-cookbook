@@ -1,0 +1,11 @@
+plugins:
+  - sorting.js
+
+decorators:
+  sorting/properties-alphabetical: on
+  sorting/tags-alphabetical: off
+  sorting/methods: off
+  sorting/enums-alphabetical: off
+  sorting/operations-alphabetical: off
+  sorting/properties-required-first: on
+
