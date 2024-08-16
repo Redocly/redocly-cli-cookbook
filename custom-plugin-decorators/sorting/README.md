@@ -34,7 +34,6 @@ const SortMethods = require('./sort-methods');
 const SortPropertiesAlphabetically = require('./sort-props-alpha');
 const SortPropertiesRequiredFirst = require('./sort-props-required');
 
-
 module.exports = {
   id: 'sorting',
   decorators: {
@@ -46,7 +45,6 @@ module.exports = {
       'properties-required-first': SortPropertiesRequiredFirst,
     }
   }
-	
 }
 ```
 
