@@ -27,6 +27,7 @@ Combine existing [built-in rules](https://redocly.com/docs/cli/rules/built-in-ru
 
 - [Spec-compliant ruleset](rulesets/spec-compliant/)
 - [Spot common mistakes](rulesets/common-mistakes)
+- [Security ruleset](rulesets/security) adds some defensive rules to your description.
 
 ### Configurable rules
 
@@ -67,6 +68,8 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 ### Miscellaneous (including tips and tricks)
 
 Share anything that didn't fit the existing categories here.
+
+- [Script to re-order an API description](./miscellaneous/reorder-bundled-description-properties/) and put the top-level properties in a particular order.
 
 ## Contributing
 
