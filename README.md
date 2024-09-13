@@ -69,7 +69,7 @@ The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimat
 
 Share anything that didn't fit the existing categories here.
 
-- [Script to re-order an API description](./miscellaneous/reorder-bundled/) and put the top-level properties in a particular order.
+- [Script to re-order an API description](./miscellaneous/reorder-bundled-description-properties/) and put the top-level properties in a particular order.
 
 ## Contributing
 
