@@ -17,11 +17,13 @@ Here's the main plugin entrypoint, it's in `tag-sorting.js`:
 
 const SortTagsAlphabetically = require('./decorator-alpha');
 
-module.exports = {
-  id: 'tag-sorting',
-  decorators: {
-    oas3: {
-      'alphabetical': SortTagsAlphabetically,
+module.exports = function tagSortingPlugin() {
+  return {
+    id: 'tag-sorting',
+    decorators: {
+      oas3: {
+        'alphabetical': SortTagsAlphabetically,
+      }
     }
   }
 }
