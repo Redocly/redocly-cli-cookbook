@@ -1,7 +1,7 @@
 # Check code sample coverage
 
 Authors:
-- Laura Rubin (@SansContext)  (with great help from Manny Silva in the Write the Docs Slack)
+- Laura Rubin @SansContext (with great help from Manny Silva @hawkeyexl in the Write the Docs Slack)
 
 ## What this does and why
 
