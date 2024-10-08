@@ -1,0 +1,30 @@
+openapi: 3.1.0
+info:
+  title: Refs test
+  version: 1.0.0
+paths:
+  /event-locations:
+    get:
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationsList"
+components:
+  schemas:
+    LocationsList:
+      type: array
+      items:
+        $ref: "#/components/schemas/EventLocation"
+        foo: Ignored property # <- error
+    EventLocation:
+      type: object
+      description: Circular!
+      properties:
+        name:
+          type: string
+        surroundingLocations:
+          description: Allowed field.
+          $ref: "#/components/schemas/LocationsList" # <- circular reference
