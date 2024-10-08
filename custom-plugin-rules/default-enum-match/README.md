@@ -15,7 +15,7 @@ Update your Redocly configuration file to include the plugin and rule. Update pa
 
 ```yaml
 plugins:
-  - './defaut-enum-plugin.js'
+  - './default-enum-plugin.js'
 
 rules:
   openapi-default-enum/default-enum-match: error
