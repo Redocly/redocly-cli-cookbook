@@ -21,7 +21,7 @@ rules:
   openapi-default-enum/default-enum-match: error
 ```
 
-### Plugin - `defaut-enum-plugin.js`
+### Plugin - `default-enum-plugin.js`
 
 The plugin defines the rule and returns it. Update paths as necessary.
 
