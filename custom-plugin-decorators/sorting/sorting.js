@@ -5,16 +5,17 @@ const SortPropertiesAlphabetically = require('./sort-props-alpha');
 const SortPropertiesRequiredFirst = require('./sort-props-required');
 
 
-module.exports = {
-  id: 'sorting',
-  decorators: {
-    oas3: {
-      'tags-alphabetical': SortTagsAlphabetically,
-      'enums-alphabetical': SortEnumsAlphabetically,
-      'methods': SortMethods,
-      'properties-alphabetical': SortPropertiesAlphabetically,
-      'properties-required-first': SortPropertiesRequiredFirst,
+module.exports = function Sorting() {
+  return {
+    id: 'sorting',
+    decorators: {
+      oas3: {
+        'tags-alphabetical': SortTagsAlphabetically,
+        'enums-alphabetical': SortEnumsAlphabetically,
+        'methods': SortMethods,
+        'properties-alphabetical': SortPropertiesAlphabetically,
+        'properties-required-first': SortPropertiesRequiredFirst,
+      }
     }
   }
-	
 }
