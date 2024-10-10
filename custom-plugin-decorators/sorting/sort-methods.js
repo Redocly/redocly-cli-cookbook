@@ -3,28 +3,20 @@ module.exports = SortMethods
 function SortMethods() {
   console.log("re-ordering methods");
   return {
-    Paths: {
-      leave(target) {
+    PathItem: {
+      leave(pathItem) {
         // the methods, in order
-        const methodList = ['post', 'patch', 'put', 'get', 'delete']
+        const methodList = ["post", "patch", "put", "get", "delete"];
 
-        // for each path in the description 
-        let paths = Object.getOwnPropertyNames(target);
-        paths.forEach((path) => {
-          let newPathItem = {};
-
-          // for each verb in turn
-          methodList.forEach((method) => {
-            if(target[path][method]) {
-              newPathItem[method] = target[path][method];
-            }
-          });
-
-          // update the path with the new structure
-          target[path] = newPathItem;
-        });
-
-      }
-    }
+        for (const method of methodList) {
+          const operation = pathItem[method];
+          // For each defined operation, delete it and re-add it to the path so they will be in the correct order:
+          if (operation) {
+            delete pathItem[method];
+            pathItem[method] = operation;
+          }
+        }
+      },
+    },```
   }
 }
