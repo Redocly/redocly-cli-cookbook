@@ -26,7 +26,11 @@ rule/x-code-samples-exist:
 
 ## Code
 
+These examples show how to create a [custom plugin](https://redocly.com/docs/cli/custom-plugins) with a rule to check that the expected code samples are present.
+
 ### Plugin - `x-code-sample-checks.js`
+
+First the main plugin code in `x-code-sample-checks.js`:
 
 ```js 
 const CheckSDKCoverage = require('./rules/check-sdk-coverage.js');
@@ -43,8 +47,16 @@ module.exports = function myRulesPlugin() {
 };
 ```
 
+Save this file and import the plugin by adding the following example to `redocly.yaml`:
+
+```yaml
+plugins:
+- ./x-code-sample-checks.js
+```
 
 ### Rule - Check SDK Coverage
+
+The main functionality of the plugin is in this file `check-dks-coverage.js`, which is as follows:
 
 ```js
 module.exports = CheckSDKCoverage;
@@ -81,11 +93,20 @@ function CheckSDKCoverage () {
 }
 ```
 
+Edit the `sdkLanguages` array to specify the languages that every endpoint should include.
+
+Enable the rule in `redocly.yaml` like this:
+
+```yaml
+rules:
+  x-code-samples-check/check-sdk-coverage: error
+```
 
 ## Examples
 
+The following sections show part of an API description, and the expected output.
 
-### Spec 
+### API description snippet
 
 ```yaml
 post:
@@ -121,7 +142,6 @@ post:
       source:
         $ref: ./code_samples/auth/custom_auth/POST/kotlin.kt
 ```
-
 
 ### Output
 
