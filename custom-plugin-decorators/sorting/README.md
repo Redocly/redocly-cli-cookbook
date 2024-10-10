@@ -17,7 +17,7 @@ Redocly CLI has some rules about sorting, that these decorators can help to sati
 This plugin includes decorators to make API descriptions match both of these rules.
 Here's a full list of the sorting features:
 
-- `methods`: sorts methods consistently (`GET`, `POST`, `PUT`, `PATCH` and `DELETE`, in that order)
+- `methods`: sorts methods consistently in the order you supply (or `GET`, `POST`, `PUT`, `PATCH` and `DELETE` by default), with any unsorted methods appended afterwards
 - `enums-alphabetical`: sorts the options for an enum field alphabetically
 - `properties-alphabetical`: sorts object properties in schemas alphabetically
 - `properties-required-first`: puts the required properties at the top of the list (run this _after_ any other property sorting decorators)
@@ -69,6 +69,7 @@ plugins:
 
 decorators:
   sorting/methods: on
+    order: [delete, get]
   sorting/tags-alphabetical: on
   sorting/enums-alphabetical: on
   sorting/properties-alphabetical: on
