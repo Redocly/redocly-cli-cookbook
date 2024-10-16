@@ -1,13 +1,13 @@
-module.exports = SortMethods
+module.exports = SortMethods;
 
-function SortMethods({order}) {
+function SortMethods({ order }) {
   console.log("re-ordering methods");
   return {
     PathItem: {
       leave(pathItem) {
         // start with the default ordering, override with config if we have it
         let methodList = ["post", "patch", "put", "get", "delete"];
-        if(order) {
+        if (order) {
           methodList = order;
         }
 
@@ -18,7 +18,7 @@ function SortMethods({order}) {
           // For each defined operation, delete it and re-add it to the path so they will be in the correct order:
           if (operation) {
             // remove it from the methods list so we know we processed it
-            existingMethods = existingMethods.filter(x => x != method)
+            existingMethods = existingMethods.filter((x) => x != method);
             delete pathItem[method];
             pathItem[method] = operation;
           }
@@ -33,8 +33,7 @@ function SortMethods({order}) {
             pathItem[method] = operation;
           }
         }
-
       },
     },
-  }
+  };
 }

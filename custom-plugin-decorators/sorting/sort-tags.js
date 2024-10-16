@@ -5,12 +5,12 @@ function SortTagsAlphabetically() {
   return {
     TagList: {
       leave(target) {
-        target.sort((a,b) => {
+        target.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
           }
         });
-      }
-    }
-  }
+      },
+    },
+  };
 }

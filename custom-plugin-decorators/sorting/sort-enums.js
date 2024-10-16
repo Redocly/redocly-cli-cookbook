@@ -5,10 +5,10 @@ function SortEnumsAlphabetically() {
   return {
     Schema: {
       leave(target) {
-        if(target.enum) {
+        if (target.enum) {
           target.enum.sort();
         }
-      }
-    }
-  }
+      },
+    },
+  };
 }

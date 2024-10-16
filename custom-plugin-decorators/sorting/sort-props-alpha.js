@@ -1,13 +1,13 @@
-module.exports = SortPropertiesAlphabetically
+module.exports = SortPropertiesAlphabetically;
 
 function SortPropertiesAlphabetically() {
   console.log("re-ordering properties: alphabetical");
   return {
     Schema: {
       leave(schema) {
-        if(schema.type == "object") {
+        if (schema.type == "object") {
           const propList = Object.getOwnPropertyNames(schema.properties).sort();
-          let newProps = {}
+          let newProps = {};
 
           propList.forEach((prop) => {
             newProps[prop] = schema.properties[prop];
@@ -15,8 +15,7 @@ function SortPropertiesAlphabetically() {
 
           schema.properties = newProps;
         }
-      }
-    }
-  }
+      },
+    },
+  };
 }
-

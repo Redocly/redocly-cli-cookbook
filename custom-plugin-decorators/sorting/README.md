@@ -1,8 +1,9 @@
 # A suite of sorting decorators
 
 Authors:
+
 - [`@lornajane`](https://github.com/lornajane), Lorna Mitchell (Redocly)
- 
+
 ## What this does and why
 
 There are lots of reasons that you'd want to alter the order of the items in your API description, such as putting required fields first, or just ordering things alphabetically (or logically!) to make things consistent and easier to find.
@@ -21,7 +22,7 @@ Here's a full list of the sorting features:
 - `methods`: sorts methods consistently in the order you supply (or `GET`, `POST`, `PUT`, `PATCH` and `DELETE` by default), with any unsorted methods appended afterwards
 - `enums-alphabetical`: sorts the options for an enum field alphabetically
 - `properties-alphabetical`: sorts object properties in schemas alphabetically
-- `properties-required-first`: puts the required properties at the top of the list (run this _after_ any other property sorting decorators)
+- `properties-required-first`: puts the required properties at the top of the list (run this *after* any other property sorting decorators)
 - `tags-alphabetical`: sorts tags alphabetically
 
 ## Code
@@ -29,34 +30,33 @@ Here's a full list of the sorting features:
 Here's the main plugin entrypoint, it's in `sorting.js`:
 
 ```javascript
-const SortTagsAlphabetically = require('./sort-tags');
-const SortEnumsAlphabetically= require('./sort-enums');
-const SortMethods = require('./sort-methods');
-const SortPropertiesAlphabetically = require('./sort-props-alpha');
-const SortPropertiesRequiredFirst = require('./sort-props-required');
-const RuleSortMethods = require('./rule-sort-methods');
-const RuleSortProps = require('./rule-sort-props');
-
+const SortTagsAlphabetically = require("./sort-tags");
+const SortEnumsAlphabetically = require("./sort-enums");
+const SortMethods = require("./sort-methods");
+const SortPropertiesAlphabetically = require("./sort-props-alpha");
+const SortPropertiesRequiredFirst = require("./sort-props-required");
+const RuleSortMethods = require("./rule-sort-methods");
+const RuleSortProps = require("./rule-sort-props");
 
 module.exports = function Sorting() {
   return {
-    id: 'sorting',
+    id: "sorting",
     rules: {
       oas3: {
-        'method-sort': RuleSortMethods,
-        'property-sort': RuleSortProps,
-      }
+        "method-sort": RuleSortMethods,
+        "property-sort": RuleSortProps,
+      },
     },
     decorators: {
       oas3: {
-        'tags-alphabetical': SortTagsAlphabetically,
-        'enums-alphabetical': SortEnumsAlphabetically,
-        'methods': SortMethods,
-        'properties-alphabetical': SortPropertiesAlphabetically,
-        'properties-required-first': SortPropertiesRequiredFirst,
-      }
-    }
-  }
+        "tags-alphabetical": SortTagsAlphabetically,
+        "enums-alphabetical": SortEnumsAlphabetically,
+        methods: SortMethods,
+        "properties-alphabetical": SortPropertiesAlphabetically,
+        "properties-required-first": SortPropertiesRequiredFirst,
+      },
+    },
+  };
 };
 ```
 
@@ -71,7 +71,7 @@ Each of the available rules/decorators is in its own file, rather than copying t
 - [sort-props-required.js](./sort-props-required.js)
 
 You can copy or adapt the plugins here to meet your own needs, changing the sorting algorithms or sorting different fields.
-One thing to look out for is that if you need to re-order the properties of an object, then you should visit the _parent_ of the object, and assign the new object to the key that should be updated.
+One thing to look out for is that if you need to re-order the properties of an object, then you should visit the parent of the object, and assign the new object to the key that should be updated.
 
 ## Examples
 
@@ -90,7 +90,7 @@ decorators:
   sorting/properties-required-first: on
 
 rules:
-  sorting/method-sort: 
+  sorting/method-sort:
     severity: error
     order: [get, post, delete]
   sorting/property-sort:
@@ -127,5 +127,4 @@ Remove or turn off any of the decorators that don't fit your use case, and let u
 
 ## References
 
-* [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical/)
-
+- [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical/)
