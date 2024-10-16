@@ -1,20 +1,26 @@
 
-function RuleSortMethods() {
+function RuleSortMethods({order}) {
   console.log("check method order");
   return {
     PathItem: {
       enter(pathItem, ctx) {
-        const methods = Object.getOwnPropertyNames(pathItem);
-        const methodOrder = ["post", "patch", "put", "get", "delete"];
+        // default method sort order, can be changed with an "order" param in config
+        let methodOrder = ["post", "patch", "put", "get", "delete"];
+        if ( order ) {
+          methodOrder = order
+        }
 
-        const filteredOrder = methodOrder.filter(item => methods.includes(item));
-        // console.log("Want", filteredOrder);
+        // Identify the methods that are present and put them in order
+        const methods = Object.getOwnPropertyNames(pathItem);
+        const expectedOrder = methodOrder.filter(item => methods.includes(item));
 
         i = 0;
-        while(i < filteredOrder.length) {
-          if (methods[i] !== filteredOrder[i]) {
+        while(i < expectedOrder.length) {
+          // if this method is in the array, it must be in the expected order
+          if(expectedOrder.includes(methods[i])
+           && methods[i] !== expectedOrder[i]) {
             ctx.report({
-                message: `Unexpected method order, expected ${filteredOrder[i]} but found ${methods[i]}`
+                message: `Unexpected method order, expected ${expectedOrder[i]} but found ${methods[i]}`
             });
           }
           i++;
