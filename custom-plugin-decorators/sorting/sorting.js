@@ -4,6 +4,7 @@ const SortMethods = require('./sort-methods');
 const SortPropertiesAlphabetically = require('./sort-props-alpha');
 const SortPropertiesRequiredFirst = require('./sort-props-required');
 const RuleSortMethods = require('./rule-sort-methods');
+const RuleSortProps = require('./rule-sort-props');
 
 
 module.exports = function Sorting() {
@@ -11,7 +12,8 @@ module.exports = function Sorting() {
     id: 'sorting',
     rules: {
       oas3: {
-        'method-sort': RuleSortMethods
+        'method-sort': RuleSortMethods,
+        'property-sort': RuleSortProps,
       }
     },
     decorators: {

@@ -1,4 +1,3 @@
-
 function RuleSortMethods({order}) {
   console.log("check method order");
   return {
