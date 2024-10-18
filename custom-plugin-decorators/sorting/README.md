@@ -10,7 +10,7 @@ There are lots of reasons that you'd want to alter the order of the items in you
 When Redocly only made API documentation tools, the sorting changes were made as part of the docs build.
 But now we make more complex tools, and many API pipelines have more than just docs in them too - so these operations are more commonly done with a decorator to transform the API description; then it can be used with any tools.
 
-Redocly CLI has a [`tags-alphabetical`](https://redocly.com/docs/cli/rules/tags-alphabetical/) rule to error if the `tags` section isn't in alphabetical order by `name`.
+Redocly CLI has a [`tags-alphabetical`](https://redocly.com/docs/cli/rules/tags-alphabetical) rule to error if the `tags` section isn't in alphabetical order by `name`.
 This plugin adds some additional *rules* for checking sort orders.
 
 - `method-sort` rule to put your methods in the desired order. The default is `["post", "patch", "put", "get", "delete"]`, but you can supply your own with an `order` parameter.
@@ -127,4 +127,4 @@ Remove or turn off any of the decorators that don't fit your use case, and let u
 
 ## References
 
-- [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical/)
+- [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical)
