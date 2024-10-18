@@ -51,6 +51,8 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 
 The [custom plugin](https://redocly.com/docs/cli/custom-plugins/) is the ultimate in extensibility, but it's an advanced feature. Try these plugins for inspiration and to get you started. Rather than including the whole plugin, there are also sections for individual rules and decorators further down.
 
+- [Sorting plugin](./custom-plugins/sorting) - rules to check sort order and decorators to transform an API description into the correct order. Includes sorting for tags, methods, properties and enum values.
+
 #### Decorators (for custom plugins)
 
 - [Tag sorting](./custom-plugin-decorators/tag-sorting) - put your tags list in alphabetical order.
