@@ -6,7 +6,7 @@ function SortMethods({ order }) {
     PathItem: {
       leave(pathItem) {
         // start with the default ordering, override with config if we have it
-        let methodList = ["post", "patch", "put", "get", "delete"];
+        let methodList = ["get", "post", "patch", "put", "delete"];
         if (order) {
           methodList = order;
         }
