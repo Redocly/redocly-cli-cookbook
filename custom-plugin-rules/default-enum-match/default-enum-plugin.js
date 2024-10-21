@@ -6,8 +6,11 @@ module.exports = function myRulesPlugin() {
         'default-enum-match': DefaultEnumMatch,
       },
       arazzo: {
-        'default-enum-match': DefaultEnum,
+        'default-enum-match': DefaultEnumMatch,
       },
+      async3: {
+        'default-enum-match': DefaultEnumMatch,
+      }
     },
   };
 };
