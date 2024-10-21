@@ -18,7 +18,7 @@ plugins:
   - './default-enum-plugin.js'
 
 rules:
-  openapi-default-enum/default-enum-match: error
+  default-enum/default-enum-match: error
 ```
 
 ### Plugin - `default-enum-plugin.js`
@@ -26,24 +26,19 @@ rules:
 The plugin defines the rule and returns it. Update paths as necessary.
 
 ```js 
-const DefaultEnumMatch = require('./default-enum-match');
-
 module.exports = function myRulesPlugin() {
   return {
-    id: 'openapi-default-enum',
+    id: 'default-enum',
     rules: {
       oas3: {
-        'default-enum-match': RequireBashSample,
+        'default-enum-match': DefaultEnumMatch,
+      },
+      arazzo: {
+        'default-enum-match': DefaultEnum,
       },
     },
   };
 };
-```
-
-### Rule - `default-enum-match.js`
-
-```js
-module.exports = DefaultEnumMatch;
 
 function DefaultEnumMatch() {
   return {
@@ -63,7 +58,6 @@ function DefaultEnumMatch() {
     },
   };
 }
-
 ```
 
 ## Examples
