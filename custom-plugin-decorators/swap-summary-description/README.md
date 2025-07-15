@@ -20,34 +20,36 @@ The following code snippet shows the decorator, in a file named `swap-fields.js`
 
 ```js
 export default function plugin() {
-  id: "swap-fields",
-  decorators: {
-    oas3: {
-      "summary-description": () => {
-        return {
-          Operation: {
-            leave(target) {
-              let description = "";
-              let summary = "";
-              if (target.description) {
-                description = target.description
-              }
-              if (target.summary) {
-                summary = target.summary
-              }
+  return {
+    id: "swap-fields",
+    decorators: {
+      oas3: {
+        "summary-description": () => {
+          return {
+            Operation: {
+              leave(target) {
+                let description = "";
+                let summary = "";
+                if (target.description) {
+                  description = target.description;
+                }
+                if (target.summary) {
+                  summary = target.summary;
+                }
 
-              // only swap them if there is some description content
-              if(description.length > 0){
-                target.description = summary;
-                target.summary = description;
-              }
+                // only swap them if there is some description content
+                if (description.length > 0) {
+                  target.description = summary;
+                  target.summary = description;
+                }
+              },
             },
-          },
-        };
+          };
+        },
       },
     },
-  },
-};
+  };
+}
 ```
 
 Put this file alongside your `redocly.yaml` file, and add the following configuration to `redocly.yaml`:
@@ -98,9 +100,7 @@ webhooks:
               "$ref": "#/components/schemas/webhook-branch-protection-configuration-disabled"
       responses:
         "200":
-          description:
-            Return a 200 status to indicate that the data was received
-            successfully
+          description: Return a 200 status to indicate that the data was received successfully
 
 components:
   schemas:
