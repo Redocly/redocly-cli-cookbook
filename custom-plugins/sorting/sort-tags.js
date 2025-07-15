@@ -1,6 +1,4 @@
-module.exports = SortTagsAlphabetically;
-
-function SortTagsAlphabetically() {
+export default function SortTagsAlphabetically() {
   console.log("re-ordering tags: alphabetical");
   return {
     TagList: {

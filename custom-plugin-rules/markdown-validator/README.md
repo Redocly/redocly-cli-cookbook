@@ -1,8 +1,8 @@
 # Validate Markdown descriptions
 
 Authors:
+
 - [`@lornajane`](https://github.com/lornajane) Lorna Mitchell (Redocly)
- 
 
 ## What this does and why
 
@@ -40,22 +40,24 @@ npm install
 The entry point for the plugin code is in `openapi-markdown.js`:
 
 ```js
-const ValidateMarkdown = require('./rule-validate-markdown.js');
+import ValidateMarkdown from "./rule-validate-markdown.js";
 
-module.exports = {
-  id: 'openapi-markdown',
-  rules: {
-    oas3: {
-      'validate': ValidateMarkdown,
+export default function plugin() {
+  return {
+    id: "openapi-markdown",
+    rules: {
+      oas3: {
+        validate: ValidateMarkdown,
     }
-  }
+  };
 }
 ```
 
 The rule itself is in `rule-validate-markdown.js`:
 
 ```js
-const markdownlint = require("markdownlint");
+import markdownlint from "markdownlint";
+
 const config = {
   // the list is here https://github.com/DavidAnson/markdownlint#rules--aliases
   MD013: { line_length: 120 },
@@ -73,7 +75,7 @@ function checkString(description, ctx) {
 
   try {
     const lintResults = markdownlint.sync(options);
-    
+
     if (lintResults.desc.length) {
       // desc is the key in the options.strings object
       let lines = description.split("\n");
@@ -84,7 +86,7 @@ function checkString(description, ctx) {
         // add line number context for longer entries
         if (desc.lineNumber > 1) {
           const charsByError = lines[desc.lineNumber].substring(0, 20);
-          message = `${message} (near: ${charsByError} ...)`
+          message = `${message} (near: ${charsByError} ...)`;
         }
 
         ctx.report({
@@ -98,7 +100,7 @@ function checkString(description, ctx) {
   }
 }
 
-function ValidateMarkdown() {
+export default function ValidateMarkdown() {
   console.log("OpenAPI Markdown: validate");
   return {
     Info: {
@@ -131,17 +133,15 @@ function ValidateMarkdown() {
     },
   };
 }
-
-module.exports = ValidateMarkdown;
 ```
 
-To control the markdown validation rules in use, edit the config at the top of the file. 
+To control the markdown validation rules in use, edit the config at the top of the file.
 
 Bring the plugin into your `redocly.yaml` file like this:
 
 ```yaml
 plugins:
-  - './openapi-markdown.js'
+  - ./openapi-markdown.js
 
 rules:
   openapi-markdown/validate: warn
@@ -155,7 +155,7 @@ Given an OpenAPI description with these opening lines:
 
 ```yaml
 openapi: 3.1.0
-info: 
+info:
   title: Redocly Museum API
   description: |-
     A fake, but awesome Museum API for interacting with museum services and information.

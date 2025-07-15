@@ -1,4 +1,4 @@
-function RuleSortMethods({ order }) {
+export default function RuleSortMethods({ order }) {
   console.log("check method order");
   return {
     PathItem: {
@@ -32,5 +32,3 @@ function RuleSortMethods({ order }) {
     },
   };
 }
-
-module.exports = RuleSortMethods;

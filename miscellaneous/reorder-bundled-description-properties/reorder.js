@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { parseYaml, stringifyYaml } = require("@redocly/openapi-core");
+import fs from "fs";
+import { parseYaml, stringifyYaml } from "@redocly/openapi-core";
 
 const reorder = (root) => {
   const { components, openapi, ...rest } = root;

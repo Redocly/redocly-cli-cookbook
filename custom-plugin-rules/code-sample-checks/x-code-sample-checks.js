@@ -1,12 +1,12 @@
-const CheckSDKCoverage = require('./rules/check-sdk-coverage.js');
+import CheckSDKCoverage from "./rules/check-sdk-coverage.js";
 
-module.exports = function myRulesPlugin() {
+export default function myRulesPlugin() {
   return {
-    id: 'x-code-samples-check',
+    id: "x-code-samples-check",
     rules: {
       oas3: {
-        'check-sdk-coverage': CheckSDKCoverage
+        "check-sdk-coverage": CheckSDKCoverage,
       },
     },
   };
-};
+}

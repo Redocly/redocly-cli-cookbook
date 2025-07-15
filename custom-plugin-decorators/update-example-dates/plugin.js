@@ -1,10 +1,12 @@
-const updateExampleDates = require("./decorator");
+import updateExampleDates from "./decorator";
 
-module.exports = {
-  id: "dates-plugin",
-  decorators: {
-    oas3: {
-      "update-example-dates": updateExampleDates,
+export default function plugin() {
+  return {
+    id: "dates-plugin",
+    decorators: {
+      oas3: {
+        "update-example-dates": updateExampleDates,
+      },
     },
-  },
-};
+  };
+}

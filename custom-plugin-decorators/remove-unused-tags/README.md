@@ -1,8 +1,8 @@
 # Remove unused tags
 
 Authors:
+
 - [`@lornajane`](https://github.com/lornajane), Lorna Mitchell (Redocly)
- 
 
 ## What this does and why
 
@@ -17,7 +17,7 @@ This is a useful decorator to use when you are reducing a larger OpenAPI file fo
 The plugin code itself is in `tags.js`:
 
 ```js
-module.exports = {
+export default function plugin() {
   id: "tags",
   decorators: {
     oas3: {
@@ -60,7 +60,7 @@ To use the custom decorator, add configuration like the following to the `redocl
 
 ```yaml
 plugins:
-  - './tags.js'
+  - "./tags.js"
 
 decorators:
   tags/no-unused-tags: on
@@ -70,7 +70,7 @@ If there are tags that should be preserved even though they are unused, add them
 
 ```yaml
 plugins:
-  - './tags.js'
+  - "./tags.js"
 
 decorators:
   tags/no-unused-tags:
@@ -95,7 +95,7 @@ Start by adding the decorator to `redocly.yaml` and including some ignore settin
 
 ```yaml
 plugins:
-  - './tags.js'
+  - ./tags.js
 
 decorators:
   tags/no-unused-tags:

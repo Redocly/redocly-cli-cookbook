@@ -18,22 +18,24 @@ You can also use expressions to add a set number of days to the value, for examp
 The `dates-plugin` plugin defines the `decorator` section and the plugin `id`:
 
 ```javascript
-const updateExampleDates = require("./decorator");
+import updateExampleDates from "./decorator";
 
-module.exports = {
-  id: "dates-plugin",
-  decorators: {
-    oas3: {
-      "update-example-dates": updateExampleDates,
+export default function plugin() {
+  return {
+    id: "dates-plugin",
+    decorators: {
+      oas3: {
+        "update-example-dates": updateExampleDates,
+      },
     },
-  },
-};
+  };
+}
 ```
 
 Here's the main part of the decorator (from `decorator.js`):
 
 ```javascript
-function updateExampleDates() {
+export default function updateExampleDates() {
   return {
     // Covers the 'examples' keyword (including examples in the 'components' section)
     Example: {

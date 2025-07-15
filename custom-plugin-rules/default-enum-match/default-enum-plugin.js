@@ -1,19 +1,19 @@
-module.exports = function myRulesPlugin() {
+export default function myRulesPlugin() {
   return {
-    id: 'default-enum',
+    id: "default-enum",
     rules: {
       oas3: {
-        'default-enum-match': DefaultEnumMatch,
+        "default-enum-match": DefaultEnumMatch,
       },
       arazzo: {
-        'default-enum-match': DefaultEnumMatch,
+        "default-enum-match": DefaultEnumMatch,
       },
       async3: {
-        'default-enum-match': DefaultEnumMatch,
-      }
+        "default-enum-match": DefaultEnumMatch,
+      },
     },
   };
-};
+}
 
 function DefaultEnumMatch() {
   return {

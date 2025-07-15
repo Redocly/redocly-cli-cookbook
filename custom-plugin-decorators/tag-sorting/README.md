@@ -1,8 +1,9 @@
 # Decorator to sort tags in an API description
 
 Authors:
+
 - [`@lornajane`](https://github.com/lornajane), Lorna Mitchell (Redocly)
- 
+
 ## What this does and why
 
 Redocly CLI has the [`tags-alphabetical`](https://redocly.com/docs/cli/rules/tags-alphabetical/) rule to error if the `tags` section isn't in alphabetical order by `name`.
@@ -14,18 +15,17 @@ This decorator provides functionality to _put_ the tags in order by name, in ord
 Here's the main plugin entrypoint, it's in `tag-sorting.js`:
 
 ```javascript
+import SortTagsAlphabetically from "./decorator-alpha";
 
-const SortTagsAlphabetically = require('./decorator-alpha');
-
-module.exports = function tagSortingPlugin() {
+export default function tagSortingPlugin() {
   return {
-    id: 'tag-sorting',
+    id: "tag-sorting",
     decorators: {
       oas3: {
-        'alphabetical': SortTagsAlphabetically,
-      }
-    }
-  }
+        alphabetical: SortTagsAlphabetically,
+      },
+    },
+  };
 }
 ```
 
@@ -34,22 +34,19 @@ The code here sets the plugin name to `tag-sorting` and adds a decorator for Ope
 The functionality for the alphabetical sorting is in `decorator-alpha.js`:
 
 ```javascript
-
-module.exports = SortTagsAlphabetically;
-
-function SortTagsAlphabetically() {
+export default function SortTagsAlphabetically() {
   console.log("re-ordering tags: alphabetical");
   return {
     TagList: {
       leave(target) {
-        target.sort((a,b) => {
+        target.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
           }
         });
-      }
-    }
-  }
+      },
+    },
+  };
 }
 ```
 
@@ -61,7 +58,7 @@ Add the plugin to `redocly.yaml` and enable the decorator:
 
 ```yaml
 plugins:
-  - './tag-sorting.js'
+  - ./tag-sorting.js
 
 decorators:
   tag-sorting/alphabetical: on
@@ -91,6 +88,5 @@ tags:
 
 ## References
 
-* [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical/)
-* The [`tags` types documentation](https://redocly.com/docs/openapi-visual-reference/tags/#types)
-
+- [`tags-alphabetical' rule](https://redocly.com/docs/cli/rules/tags-alphabetical/)
+- The [`tags` types documentation](https://redocly.com/docs/openapi-visual-reference/tags/#types)

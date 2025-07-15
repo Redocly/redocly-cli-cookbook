@@ -1,12 +1,12 @@
-const SortTagsAlphabetically = require("./sort-tags");
-const SortEnumsAlphabetically = require("./sort-enums");
-const SortMethods = require("./sort-methods");
-const SortPropertiesAlphabetically = require("./sort-props-alpha");
-const SortPropertiesRequiredFirst = require("./sort-props-required");
-const RuleSortMethods = require("./rule-sort-methods");
-const RuleSortProps = require("./rule-sort-props");
+import SortTagsAlphabetically from "./sort-tags";
+import SortEnumsAlphabetically from "./sort-enums";
+import SortMethods from "./sort-methods";
+import SortPropertiesAlphabetically from "./sort-props-alpha";
+import SortPropertiesRequiredFirst from "./sort-props-required";
+import RuleSortMethods from "./rule-sort-methods";
+import RuleSortProps from "./rule-sort-props";
 
-module.exports = function Sorting() {
+export default function Sorting() {
   return {
     id: "sorting",
     rules: {
@@ -25,4 +25,4 @@ module.exports = function Sorting() {
       },
     },
   };
-};
+}

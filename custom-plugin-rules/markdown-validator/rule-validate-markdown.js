@@ -1,4 +1,5 @@
-const markdownlint = require("markdownlint");
+import markdownlint from "markdownlint";
+
 const config = {
   // the list is here https://github.com/DavidAnson/markdownlint#rules--aliases
   MD013: { line_length: 120 },
@@ -16,7 +17,7 @@ function checkString(description, ctx) {
 
   try {
     const lintResults = markdownlint.sync(options);
-    
+
     if (lintResults.desc.length) {
       // desc is the key in the options.strings object
       let lines = description.split("\n");
@@ -28,7 +29,7 @@ function checkString(description, ctx) {
         if (desc.lineNumber > 1) {
           // computer counts from zero, humans count from 1
           const charsByError = lines[desc.lineNumber - 1].substring(0, 20);
-          message = `${message} (near: ${charsByError} ...)`
+          message = `${message} (near: ${charsByError} ...)`;
         }
 
         ctx.report({
@@ -42,7 +43,7 @@ function checkString(description, ctx) {
   }
 }
 
-function ValidateMarkdown() {
+export default function ValidateMarkdown() {
   console.log("OpenAPI Markdown: validate");
   return {
     Info: {
@@ -75,5 +76,3 @@ function ValidateMarkdown() {
     },
   };
 }
-
-module.exports = ValidateMarkdown;

@@ -1,5 +1,6 @@
 rules:
-  spec: error
+  struct: error
+  nullable-type-sibling: error
   spec-strict-refs: error
   no-undefined-server-variable: error
   path-not-include-query: error

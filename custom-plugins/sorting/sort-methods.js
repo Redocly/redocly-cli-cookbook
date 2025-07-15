@@ -1,6 +1,4 @@
-module.exports = SortMethods;
-
-function SortMethods({ order }) {
+export default function SortMethods({ order }) {
   console.log("re-ordering methods");
   return {
     PathItem: {

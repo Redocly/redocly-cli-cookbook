@@ -11,18 +11,18 @@ When Redocly only made API documentation tools, the sorting changes were made as
 But now we make more complex tools, and many API pipelines have more than just docs in them too - so these operations are more commonly done with a decorator to transform the API description; then it can be used with any tools.
 
 Redocly CLI has a [`tags-alphabetical`](https://redocly.com/docs/cli/rules/tags-alphabetical) rule to error if the `tags` section isn't in alphabetical order by `name`.
-This plugin adds some additional *rules* for checking sort orders.
+This plugin adds some additional _rules_ for checking sort orders.
 
 - `method-sort` rule to put your methods in the desired order. The default is `["post", "patch", "put", "get", "delete"]`, but you can supply your own with an `order` parameter.
 - `property-sort` rule to sort properties either alphabetically with `order: alpha` (the default sort order for this rule) or with `order: required` to put the required properties first.
 
-The plugin also includes *decorators* to sort your OpenAPI descriptions, perhaps to allow an existing OpenAPI description to be easily updated to meet the expectations of the sorting rules.
+The plugin also includes _decorators_ to sort your OpenAPI descriptions, perhaps to allow an existing OpenAPI description to be easily updated to meet the expectations of the sorting rules.
 Here's a full list of the sorting features:
 
 - `methods`: sorts methods consistently in the order you supply (or `GET`, `POST`, `PUT`, `PATCH` and `DELETE` by default), with any unsorted methods appended afterwards
 - `enums-alphabetical`: sorts the options for an enum field alphabetically
 - `properties-alphabetical`: sorts object properties in schemas alphabetically
-- `properties-required-first`: puts the required properties at the top of the list (run this *after* any other property sorting decorators)
+- `properties-required-first`: puts the required properties at the top of the list (run this _after_ any other property sorting decorators)
 - `tags-alphabetical`: sorts tags alphabetically
 
 ## Code
@@ -30,15 +30,15 @@ Here's a full list of the sorting features:
 Here's the main plugin entrypoint, it's in `sorting.js`:
 
 ```javascript
-const SortTagsAlphabetically = require("./sort-tags");
-const SortEnumsAlphabetically = require("./sort-enums");
-const SortMethods = require("./sort-methods");
-const SortPropertiesAlphabetically = require("./sort-props-alpha");
-const SortPropertiesRequiredFirst = require("./sort-props-required");
-const RuleSortMethods = require("./rule-sort-methods");
-const RuleSortProps = require("./rule-sort-props");
+import SortTagsAlphabetically from "./sort-tags";
+import SortEnumsAlphabetically from "./sort-enums";
+import SortMethods from "./sort-methods";
+import SortPropertiesAlphabetically from "./sort-props-alpha";
+import SortPropertiesRequiredFirst from "./sort-props-required";
+import RuleSortMethods from "./rule-sort-methods";
+import RuleSortProps from "./rule-sort-props";
 
-module.exports = function Sorting() {
+export default function Sorting() {
   return {
     id: "sorting",
     rules: {
@@ -57,7 +57,7 @@ module.exports = function Sorting() {
       },
     },
   };
-};
+}
 ```
 
 Each of the available rules/decorators is in its own file, rather than copying them here, you can view them in the same directory as this `README`:
