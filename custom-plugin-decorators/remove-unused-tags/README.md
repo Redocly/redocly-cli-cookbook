@@ -60,7 +60,7 @@ To use the custom decorator, add configuration like the following to the `redocl
 
 ```yaml
 plugins:
-  - "./tags.js"
+  - ./tags.js
 
 decorators:
   tags/no-unused-tags: on
@@ -70,7 +70,7 @@ If there are tags that should be preserved even though they are unused, add them
 
 ```yaml
 plugins:
-  - "./tags.js"
+  - ./tags.js
 
 decorators:
   tags/no-unused-tags:
