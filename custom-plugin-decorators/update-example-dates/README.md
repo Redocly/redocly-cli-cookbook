@@ -18,7 +18,7 @@ You can also use expressions to add a set number of days to the value, for examp
 The `dates-plugin` plugin defines the `decorator` section and the plugin `id`:
 
 ```javascript
-import updateExampleDates from "./decorator";
+import updateExampleDates from "./decorator.js";
 
 export default function plugin() {
   return {
