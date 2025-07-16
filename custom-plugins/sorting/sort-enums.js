@@ -1,6 +1,4 @@
-module.exports = SortEnumsAlphabetically;
-
-function SortEnumsAlphabetically() {
+export default function SortEnumsAlphabetically() {
   console.log("re-ordering enums: alphabetical");
   return {
     Schema: {

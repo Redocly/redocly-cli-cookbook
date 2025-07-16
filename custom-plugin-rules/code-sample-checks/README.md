@@ -1,6 +1,7 @@
 # Check code sample coverage
 
 Authors:
+
 - Laura Rubin @SansContext (with great help from Manny Silva @hawkeyexl in the Write the Docs Slack)
 
 ## What this does and why
@@ -15,13 +16,13 @@ You probably want to set these to `warn` if you think you're going to have a lot
 
 ```yaml
 rule/x-code-samples-exist:
-    subject:
-      type: Operation
-      property: x-code-samples
-    assertions:
-      defined: true
-    message: "Each path must have an x-code-samples object."
-    severity: warn
+  subject:
+    type: Operation
+    property: x-code-samples
+  assertions:
+    defined: true
+  message: "Each path must have an x-code-samples object."
+  severity: warn
 ```
 
 ## Code
@@ -32,26 +33,26 @@ These examples show how to create a [custom plugin](https://redocly.com/docs/cli
 
 First the main plugin code in `x-code-sample-checks.js`:
 
-```js 
-const CheckSDKCoverage = require('./rules/check-sdk-coverage.js');
+```js
+import CheckSDKCoverage from "./rules/check-sdk-coverage.js";
 
-module.exports = function myRulesPlugin() {
+export default function myRulesPlugin() {
   return {
-    id: 'x-code-samples-check',
+    id: "x-code-samples-check",
     rules: {
       oas3: {
-        'check-sdk-coverage': CheckSDKCoverage
+        "check-sdk-coverage": CheckSDKCoverage,
       },
     },
   };
-};
+}
 ```
 
 Save this file and import the plugin by adding the following example to `redocly.yaml`:
 
 ```yaml
 plugins:
-- ./x-code-sample-checks.js
+  - ./x-code-sample-checks.js
 ```
 
 ### Rule - Check SDK Coverage
@@ -59,37 +60,38 @@ plugins:
 The main functionality of the plugin is in this file `check-dks-coverage.js`, which is as follows:
 
 ```js
-module.exports = CheckSDKCoverage;
+const sdkLanguages = ["bash", "javascript", "python", "ruby", "java", "kotlin"];
 
-const sdkLanguages = ['bash', 'javascript', 'python', 'ruby', 'java', 'kotlin'];
-
-function CheckSDKCoverage () {
-    return {
-        XCodeSampleList: {
-          enter(codeSampleList, ctx) {
-            // Make sure the list contains at least one bash sample
-            const hasBashSample = codeSampleList.some((codeSample) => {
-              return codeSample.lang === 'bash';
-            });
-            //check for the other SDK languages by making an array of the lang fields from the code samples
-            const langArray = codeSampleList.map((codeSample) => {
-              return codeSample.lang;
-            });
-            //compare the sdkLanguages array with the langArray to find the missing languages, and save them to an array
-            const missingLanguages = sdkLanguages.filter((lang) => {
-                return !langArray.includes(lang);
-            }
-            );
-            //if there are missing languages, report them as warnings
-            // might want to make this less verbose later
-            if (missingLanguages.length > 0) {
-            ctx.report({
-                message: `Only ${langArray.length} code samples: ${langArray.join(', ')} but is missing the following SDK languages: ${missingLanguages.join(', ')}`,
-            });
-            }
-            }
+export default function CheckSDKCoverage() {
+  return {
+    XCodeSampleList: {
+      enter(codeSampleList, ctx) {
+        // Make sure the list contains at least one bash sample
+        const hasBashSample = codeSampleList.some((codeSample) => {
+          return codeSample.lang === "bash";
+        });
+        //check for the other SDK languages by making an array of the lang fields from the code samples
+        const langArray = codeSampleList.map((codeSample) => {
+          return codeSample.lang;
+        });
+        //compare the sdkLanguages array with the langArray to find the missing languages, and save them to an array
+        const missingLanguages = sdkLanguages.filter((lang) => {
+          return !langArray.includes(lang);
+        });
+        //if there are missing languages, report them as warnings
+        // might want to make this less verbose later
+        if (missingLanguages.length > 0) {
+          ctx.report({
+            message: `Only ${langArray.length} code samples: ${langArray.join(
+              ", "
+            )} but is missing the following SDK languages: ${missingLanguages.join(
+              ", "
+            )}`,
+          });
         }
-    };
+      },
+    },
+  };
 }
 ```
 
@@ -112,14 +114,10 @@ The following sections show part of an API description, and the expected output.
 post:
   operationId: custom_auth_flow
   summary: Custom Authentication
-  description: 
-    [...] # Omitted for brevity
-  security:
-    [...] # Omitted for brevity
-  requestBody:
-    [...] # Omitted for brevity
-  responses:
-    [...] # Omitted for brevity
+  description: [...] # Omitted for brevity
+  security: [...] # Omitted for brevity
+  requestBody: [...] # Omitted for brevity
+  responses: [...] # Omitted for brevity
   x-code-samples:
     - lang: bash
       label: cURL
@@ -149,4 +147,3 @@ post:
 api-docs/paths/auth/custom.yaml:
   435:5  error    x-code-samples-check/check-sdk-coverage  Only 5 code samples: bash, ruby, python, java, kotlin but is missing the following SDK languages: javascript
 ```
-

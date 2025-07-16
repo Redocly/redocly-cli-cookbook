@@ -1,4 +1,4 @@
-function RuleSortProps({ type }) {
+export default function RuleSortProps({ type }) {
   let sortType = "alpha"; // default
   const supportedSortTypes = ["alpha", "required"];
   if (type && supportedSortTypes.includes(type)) {
@@ -68,5 +68,3 @@ function RuleSortProps({ type }) {
     },
   };
 }
-
-module.exports = RuleSortProps;

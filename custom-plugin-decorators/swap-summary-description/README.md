@@ -1,15 +1,16 @@
 # Swap the summary and description fields
 
 Authors:
+
 - [`@lornajane`](https://github.com/lornajane), Lorna Mitchell (Redocly)
- 
+
 ## What this does and why
 
 We sometimes see API descriptions with the fields mixed up.
 The most common of these is the `summary` and `description` fields on Operations in OpenAPI, some generators seem to produce the fields with the content reversed.
 
-* Summary: used when the operations are displayed in a list, it should be a very short phrase to describe the operation.
-* Description: used to supply more detail, used when the operation is displayed in detail. The description field also suports Markdown.
+- Summary: used when the operations are displayed in a list, it should be a very short phrase to describe the operation.
+- Description: used to supply more detail, used when the operation is displayed in detail. The description field also suports Markdown.
 
 This decorator takes the content of both fields and (as long as there is some content in the description field), swaps them over.
 
@@ -18,35 +19,37 @@ This decorator takes the content of both fields and (as long as there is some co
 The following code snippet shows the decorator, in a file named `swap-fields.js`:
 
 ```js
-module.exports = {
-  id: "swap-fields",
-  decorators: {
-    oas3: {
-      "summary-description": () => {
-        return {
-          Operation: {
-            leave(target) {
-              let description = "";
-              let summary = "";
-              if (target.description) {
-                description = target.description
-              }
-              if (target.summary) {
-                summary = target.summary
-              }
+export default function plugin() {
+  return {
+    id: "swap-fields",
+    decorators: {
+      oas3: {
+        "summary-description": () => {
+          return {
+            Operation: {
+              leave(target) {
+                let description = "";
+                let summary = "";
+                if (target.description) {
+                  description = target.description;
+                }
+                if (target.summary) {
+                  summary = target.summary;
+                }
 
-              // only swap them if there is some description content
-              if(description.length > 0){
-                target.description = summary;
-                target.summary = description;
-              }
+                // only swap them if there is some description content
+                if (description.length > 0) {
+                  target.description = summary;
+                  target.summary = description;
+                }
+              },
             },
-          },
-        };
+          };
+        },
       },
     },
-  },
-};
+  };
+}
 ```
 
 Put this file alongside your `redocly.yaml` file, and add the following configuration to `redocly.yaml`:
@@ -96,9 +99,8 @@ webhooks:
             schema:
               "$ref": "#/components/schemas/webhook-branch-protection-configuration-disabled"
       responses:
-        '200':
-          description: Return a 200 status to indicate that the data was received
-            successfully
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
 
 components:
   schemas:
@@ -109,7 +111,7 @@ components:
         action:
           type: string
           enum:
-          - disabled
+            - disabled
 ```
 
 After the decorator has been run, the updated file looks like the following example:
@@ -143,9 +145,9 @@ webhooks:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhook-branch-protection-configuration-disabled'
+              $ref: "#/components/schemas/webhook-branch-protection-configuration-disabled"
       responses:
-        '200':
+        "200":
           description: Return a 200 status to indicate that the data was received successfully
 components:
   schemas:

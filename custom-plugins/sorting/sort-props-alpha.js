@@ -1,6 +1,4 @@
-module.exports = SortPropertiesAlphabetically;
-
-function SortPropertiesAlphabetically() {
+export default function SortPropertiesAlphabetically() {
   console.log("re-ordering properties: alphabetical");
   return {
     Schema: {

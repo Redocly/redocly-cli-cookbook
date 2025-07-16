@@ -1,8 +1,8 @@
 # spec-compliant ruleset
 
 Authors:
+
 - `@CidTori`
- 
 
 ## What this does and why
 
@@ -18,7 +18,8 @@ You can use it in your `redocly.yaml` wih [`extends`](https://redocly.com/docs/c
 
 ```yaml
 rules:
-  spec: error
+  struct: error
+  nullable-type-sibling: error
   spec-strict-refs: error
   no-undefined-server-variable: error
   path-not-include-query: error
@@ -41,7 +42,8 @@ rules:
 
 Here is why each rule is included:
 
-- `spec`: [obviously](https://redocly.com/docs/cli/rules/spec/#api-design-principles)
+- `struct`: [ensures structural correctness](https://redocly.com/docs/cli/rules/spec/#api-design-principles)
+- `nullable-type-sibling`: [ensures compliance with the OpenAPI 3.0 spec](https://redocly.com/docs/cli/v2/rules/oas/nullable-type-sibling)
 - `spec-strict-refs`: ["strict adherence to the specifications"](https://redocly.com/docs/cli/rules/spec-strict-refs/#api-design-principles)
 - `no-undefined-server-variable`: ["it's an error with the specification"](https://redocly.com/docs/cli/rules/no-undefined-server-variable/#api-design-principles)
 - `path-declaration-must-exist`: ["This rule is for spec correctness"](https://redocly.com/docs/cli/rules/path-declaration-must-exist/#api-design-principles)
@@ -57,6 +59,6 @@ Here is why each rule is included:
 - `no-invalid-schema-examples`: ["It is RECOMMENDED that these values be valid against the associated schema."](https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-validation-00#section-9.5)
 - `no-example-value-and-externalValue`: ["The value field and externalValue field are mutually exclusive."](https://spec.openapis.org/oas/latest.html#fixed-fields-15)
 - `no-unresolved-refs` (debatable): ["The referenced structure MUST be in the form of a Path Item Object."](https://spec.openapis.org/oas/latest.html#fixed-fields-6)
-- `spec-components-invalid-map-name`: ["All the fixed fields declared above are objects that MUST use keys that match the regular expression: ^\[a-zA-Z0-9\.\-_\]+$."](https://spec.openapis.org/oas/latest.html#fixed-fields-5)
+- `spec-components-invalid-map-name`: ["All the fixed fields declared above are objects that MUST use keys that match the regular expression: ^\[a-zA-Z0-9\.\-\_\]+$."](https://spec.openapis.org/oas/latest.html#fixed-fields-5)
 
 Please, feel free to open issues or pull requests to suggest updates or additions to this ruleset.

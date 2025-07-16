@@ -1,4 +1,4 @@
-function updateExampleDates() {
+export default function updateExampleDates() {
   return {
     // Covers the 'examples' keyword (including examples in the 'components' section)
     Example: {
@@ -48,5 +48,3 @@ function computeDateTemplate(template) {
     .reduce((sum, item) => sum + +item, 0);
   return new Date(calculated).toISOString();
 }
-
-module.exports = updateExampleDates;

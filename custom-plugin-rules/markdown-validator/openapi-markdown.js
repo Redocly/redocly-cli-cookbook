@@ -1,10 +1,12 @@
-const ValidateMarkdown = require("./rule-validate-markdown.js");
+import ValidateMarkdown from "./rule-validate-markdown.js";
 
-module.exports = {
-  id: "openapi-markdown",
-  rules: {
-    oas3: {
-      validate: ValidateMarkdown,
+export default function plugin() {
+  return {
+    id: "openapi-markdown",
+    rules: {
+      oas3: {
+        validate: ValidateMarkdown,
+      },
     },
-  },
-};
+  };
+}

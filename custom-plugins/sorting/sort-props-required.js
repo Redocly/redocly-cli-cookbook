@@ -1,6 +1,4 @@
-module.exports = SortPropertiesRequiredFirst;
-
-function SortPropertiesRequiredFirst() {
+export default function SortPropertiesRequiredFirst() {
   console.log("re-ordering properties: required first");
   return {
     Schema: {

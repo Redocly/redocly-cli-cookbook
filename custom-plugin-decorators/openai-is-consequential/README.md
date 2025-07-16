@@ -19,7 +19,7 @@ If you want to set the GET operations to true too, then this decorator is for yo
 The code is entirely in `openai-is-consequential.js`:
 
 ```javascript
-module.exports = {
+export default function plugin() {
   id: "openai-plugin",
   decorators: {
     oas3: {

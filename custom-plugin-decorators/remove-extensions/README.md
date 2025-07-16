@@ -17,8 +17,7 @@ The plugin itself can be found in [`remove-extensions.js'](./remove-extensions.j
 Create a `plugin.js` file to refer to this file:
 
 ```js
-const RemoveExtensions = require("./remove-extensions");
-const id = "plugin";
+import RemoveExtensions from "./remove-extensions";
 
 /** @type {import('@redocly/cli').DecoratorsConfig} */
 const decorators = {
@@ -27,10 +26,12 @@ const decorators = {
   },
 };
 
-module.exports = {
-  id,
-  decorators,
-};
+export default function plugin() {
+  return {
+    id: "plugin",
+    decorators,
+  };
+}
 ```
 
 Create/edit `redocly.yaml` as follows (edit with your own settings):
@@ -47,7 +48,7 @@ apis:
           - x-amazon*
           - x-google*
 plugins:
-  - "./plugin.js"
+  - ./plugin.js
 ```
 
 Run the `bundle` command to remove all the [GCP](https://cloud.google.com/endpoints/docs/openapi/openapi-extensions) and [AWS](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html) custom OpenAPI extensions from the OpenAPI description:
@@ -55,6 +56,7 @@ Run the `bundle` command to remove all the [GCP](https://cloud.google.com/endpoi
 ```bash
 redocly bundle with-plugin@latest --output dist/with-plugin.yaml
 ```
+
 The `extensions` parameter is optional. If empty or not set, it will remove all extensions (elements starting with `x-`). The accepted values for the `extensions` param are:
 
 - `extensions: <regex-valid-extension>`
@@ -62,7 +64,6 @@ The `extensions` parameter is optional. If empty or not set, it will remove all 
 - `extensions: <empty>`
 
 Regular expressions follow [Javascript Regex convention](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
-
 
 ## Examples
 

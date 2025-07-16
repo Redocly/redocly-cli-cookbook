@@ -1,12 +1,12 @@
-const SortTagsAlphabetically = require('./decorator-alpha');
+import SortTagsAlphabetically from "./decorator-alpha.js";
 
-module.exports = function tagSortingPlugin() {
+export default function tagSortingPlugin() {
   return {
-    id: 'tag-sorting',
+    id: "tag-sorting",
     decorators: {
       oas3: {
-        'alphabetical': SortTagsAlphabetically,
-      }
-    }
-  }
+        alphabetical: SortTagsAlphabetically,
+      },
+    },
+  };
 }

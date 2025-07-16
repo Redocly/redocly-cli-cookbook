@@ -1,4 +1,4 @@
-module.exports = {
+export default function plugin() {
   id: "azure-apim",
   decorators: {
     oas3: {

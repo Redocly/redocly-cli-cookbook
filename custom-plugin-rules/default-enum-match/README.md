@@ -1,6 +1,7 @@
 # Default is an Enum
 
 Authors:
+
 - [@hawkeyexl](https://github.com/hawkeyexl) Manny Silva ([Doc Detective](https://doc-detective.com))
 
 ## What this does and why
@@ -15,7 +16,7 @@ Update your Redocly configuration file to include the plugin and rule. Update pa
 
 ```yaml
 plugins:
-  - './default-enum-plugin.js'
+  - ./default-enum-plugin.js
 
 rules:
   default-enum/default-enum-match: error
@@ -25,23 +26,23 @@ rules:
 
 The plugin defines the rule and returns it. Update paths as necessary.
 
-```js 
-module.exports = function myRulesPlugin() {
+```js
+export default function myRulesPlugin() {
   return {
-    id: 'default-enum',
+    id: "default-enum",
     rules: {
       oas3: {
-        'default-enum-match': DefaultEnumMatch,
+        "default-enum-match": DefaultEnumMatch,
       },
       arazzo: {
-        'default-enum-match': DefaultEnumMatch,
+        "default-enum-match": DefaultEnumMatch,
       },
       async3: {
-        'default-enum-match': DefaultEnumMatch,
-      }
+        "default-enum-match": DefaultEnumMatch,
+      },
     },
   };
-};
+}
 
 function DefaultEnumMatch() {
   return {
@@ -69,12 +70,12 @@ Given an OpenAPI description with the following schema:
 
 ```yaml
 color:
-    type: string
-    enum:
-      - blue
-      - red
-      - yellow
-    default: green
+  type: string
+  enum:
+    - blue
+    - red
+    - yellow
+  default: green
 ```
 
 You get the following output:
