@@ -1,4 +1,4 @@
-import SortTagsAlphabetically from "./decorator-alpha";
+import SortTagsAlphabetically from "./decorator-alpha.js";
 
 export default function tagSortingPlugin() {
   return {
