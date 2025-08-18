@@ -20,13 +20,15 @@ The code is entirely in `openai-is-consequential.js`:
 
 ```javascript
 export default function plugin() {
-  id: "openai-plugin",
-  decorators: {
-    oas3: {
-      "is-consequential": OpenAIConsequential,
+  return {
+    id: "openai-plugin",
+    decorators: {
+      oas3: {
+        "is-consequential": OpenAIConsequential,
+      },
     },
-  },
-};
+  };
+}
 
 /** @type {import('@redocly/cli').OasDecorator} */
 function OpenAIConsequential() {
