@@ -1,9 +1,10 @@
 export default function plugin() {
-  id: "openai-plugin",
-  decorators: {
-    oas3: {
-      "is-consequential": OpenAIConsequential,
-    },
+  return {
+    id: "openai-plugin",
+    decorators: {
+      oas3: {
+        "is-consequential": OpenAIConsequential,
+      },
   },
 };
 
