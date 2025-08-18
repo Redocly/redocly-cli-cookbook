@@ -43,7 +43,7 @@ rules:
 Here is why each rule is included:
 
 - `struct`: [ensures structural correctness](https://redocly.com/docs/cli/rules/spec/#api-design-principles)
-- `nullable-type-sibling`: [ensures compliance with the OpenAPI 3.0 spec](https://redocly.com/docs/cli/v2/rules/oas/nullable-type-sibling)
+- `nullable-type-sibling`: [ensures compliance with the OpenAPI 3.0 spec](https://redocly.com/docs/cli/rules/oas/nullable-type-sibling)
 - `spec-strict-refs`: ["strict adherence to the specifications"](https://redocly.com/docs/cli/rules/spec-strict-refs/#api-design-principles)
 - `no-undefined-server-variable`: ["it's an error with the specification"](https://redocly.com/docs/cli/rules/no-undefined-server-variable/#api-design-principles)
 - `path-declaration-must-exist`: ["This rule is for spec correctness"](https://redocly.com/docs/cli/rules/path-declaration-must-exist/#api-design-principles)
