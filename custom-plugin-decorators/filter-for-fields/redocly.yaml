@@ -1,0 +1,10 @@
+apis:
+  api-one-name:
+    root: api-one-definition.yaml
+    decorators:
+      filter-for-fields-plugin/filter-for-fields-decorator:
+        public: true
+plugins:
+  - "./filter-for-fields-plugin.js"
+extends:
+  - recommended
