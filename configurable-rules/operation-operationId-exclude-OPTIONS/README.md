@@ -26,7 +26,7 @@ This rule can be tweaked to exclude any combination of operations, or inversely 
 >     operation-operationId: off
 > ```
 
-This rule is added to your `redocly.yaml` file:
+This rule is added to the `rules` section of your `redocly.yaml` file:
 
 ```yaml
 rule/operation-operationId-exclude-OPTIONS:
@@ -69,84 +69,31 @@ Alternatively, you can use the `filterInParentKeys` property to define which ope
 
 ## Examples
 
-With the rule configured with `severity: error`, the following snippet of a `GET` operation will trigger this rule & display an error:
+With the rule configured with `severity: error`, the following snippet of a `GET` and `POST` operations will trigger this rule & display an error:
 
 ```yaml
-get:
-  tags:
-  - Endpoint
-  summary: "Example endpoint."
-  parameters:
-  - name: "Authorization"
-    in: "header"
-    description: "Auth Token"
-    required: true
-    schema:
-      type: "string"
-  responses:
-    "200":
-      description: "200 response"
-      headers:
-        Access-Control-Allow-Origin:
-          schema:
-            type: "string"
-      content:
-        application/json:
-          schema:
-            $ref: ../models/200Response.yaml
-    "400":
-      description: "400 response"
-      headers:
-        Access-Control-Allow-Origin:
-          schema:
-            type: "string"
-      content:
-        application/json:
-          schema:
-            $ref: ../models/ErrorResponse.yaml
-  security:
-  - Authorizer: []
-  - api_key: []
-```
+openapi: 3.1.0
+info: {}
+paths:
+  /example:
+    get: # Error: Operation is missing 'operationId' property. Rule: operation-operationId-exclude-OPTIONS
+      security:
+        - api_key: []
+      responses:
+        '200':
+          content: {}
 
-However, the following snippet of an `OPTIONS` operation **won't** trigger the rule:
+    post: # Error: Operation is missing 'operationId' property. Rule: operation-operationId-exclude-OPTIONS
+      security:
+        - api_key: []
+      responses:
+        '201':
+          content: {}
 
-```yaml
-options:
-  tags:
-  - Endpoint
-  summary: "Example endpoint."
-  parameters:
-  - name: "Authorization"
-    in: "header"
-    description: "Auth Token"
-    required: true
-    schema:
-      type: "string"
-  responses:
-    "200":
-      description: "200 response"
-      headers:
-        Access-Control-Allow-Origin:
-          schema:
-            type: "string"
-      content:
-        application/json:
-          schema:
-            $ref: ../models/200Response.yaml
-    "400":
-      description: "400 response"
-      headers:
-        Access-Control-Allow-Origin:
-          schema:
-            type: "string"
-      content:
-        application/json:
-          schema:
-            $ref: ../models/ErrorResponse.yaml
-  security:
-  - Authorizer: []
-  - api_key: []
+    options: # No error
+      responses:
+        '204':
+          content: {}
 ```
 
 ## References
