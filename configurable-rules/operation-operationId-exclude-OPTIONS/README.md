@@ -5,26 +5,11 @@ Author:
 
 ## What this does and why
 
-This rule extends the built-in rule [operation-operationId](https://redocly.com/docs/cli/rules/oas/operation-operationId) by filtering out set operations e.g. `OPTIONS`.
+This rule throws an error for all operations that are missing the `operationId` property, while filtering out specific operations that you want to exclude from this validation (e.g. `OPTIONS`).
 
 This rule can be tweaked to exclude any combination of operations, or inversely to **include** set operations. 
 
 ## Code
-
-> If you are using a ruleset that includes the `operation-operationId` rule (like `recommended`), you will need to disable this rule in order for the configurable rule to apply.
-> 
-> e.g. if your `redocly.yaml` file contains:
->
-> ```yaml
-> extends:
->   - recommended
-> ```
-> You will need to include the following snippet in the `rules` property:
->
-> ```yaml
->   rules:
->     operation-operationId: off
-> ```
 
 This rule is added to the `rules` section of your `redocly.yaml` file:
 
@@ -69,7 +54,7 @@ Alternatively, you can use the `filterInParentKeys` property to define which ope
 
 ## Examples
 
-With the rule configured with `severity: error`, the following snippet of a `GET` and `POST` operations will trigger this rule & display an error:
+With the rule configured with `severity: error`, the following snippet of a `GET` and `POST` operations will trigger this rule and display an error:
 
 ```yaml
 openapi: 3.1.0
@@ -77,15 +62,11 @@ info: {}
 paths:
   /example:
     get: # Error: Operation is missing 'operationId' property. Rule: operation-operationId-exclude-OPTIONS
-      security:
-        - api_key: []
       responses:
         '200':
           content: {}
 
     post: # Error: Operation is missing 'operationId' property. Rule: operation-operationId-exclude-OPTIONS
-      security:
-        - api_key: []
       responses:
         '201':
           content: {}
@@ -94,6 +75,21 @@ paths:
       responses:
         '204':
           content: {}
+```
+
+**Note:** If you are using a ruleset that includes the [operation-operationId](https://redocly.com/docs/cli/rules/oas/operation-operationId) rule (like `recommended`), you will need to disable this rule in order for the configurable rule to apply.
+
+If your `redocly.yaml` file contains:
+
+```yaml
+extends:
+  - recommended
+```
+You will need to include the following snippet in the `rules` property:
+
+```yaml
+rules:
+  operation-operationId: off
 ```
 
 ## References
