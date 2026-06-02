@@ -1,0 +1,6 @@
+plugins:
+  - './plugin.js'
+
+decorators:
+  security-plugin/spread-security-to-operations:
+    pathSecurityFile: ./foo.yaml
