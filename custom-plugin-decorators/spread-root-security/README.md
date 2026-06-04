@@ -10,45 +10,37 @@ When you use `redocly join` to combine multiple API descriptions into one, root-
 
 A common scenario is when one spec (for example, `foo.yaml`) defines shared infrastructure — security schemes and root-level `security` — but has no paths of its own, while another spec (`bar.yaml`) defines all the paths but has no `security` at all. After joining, the operations from `bar.yaml` end up with no security applied.
 
-This decorator (`spread-security-to-operations`) solves that: it reads the root-level `security` from a specified source file and applies it to any operation that doesn't already define its own `security`. It runs as a post-join `bundle` step, giving you full control over which security gets applied and where.
+This decorator (`spread-root-security`) solves that: it reads the root-level `security` from a specified source file (for example `foo.yaml`) and sets it as root-level `security` on the document you are bundling when that document does not already define its own. It runs as a `bundle` step, giving you full control over which file supplies the requirement.
 
 ## Code
 
-The `security-plugin` plugin defines the `decorator` section and the plugin `id`:
+The following code snippet shows the decorator, in a file named `plugin.js`:
 
 ```javascript
-import spreadSecurityToOperations from "./decorator";
-
 export default function plugin() {
   return {
     id: "security-plugin",
     decorators: {
       oas3: {
-        "spread-security-to-operations": spreadSecurityToOperations,
+        "spread-root-security": ({ pathSecurityFile }) => {
+          return {
+            Root: {
+              leave(root, { config }) {
+                const absolutePath = path.isAbsolute(pathSecurityFile)
+                  ? pathSecurityFile
+                  : path.resolve(path.dirname(config.configPath), pathSecurityFile);
+                const doc = yaml.load(fs.readFileSync(absolutePath, 'utf8'));
+                
+                if (doc?.security === undefined || root.security !== undefined) return;
+                root.security = doc?.security;
+              },
+            },
+          };
+        },
       },
     },
-  };
+  }
 }
-```
-
-Here's the main part of the decorator (from `decorator.js`):
-
-```javascript
-export default function spreadSecurityToOperations({ pathSecurityFile } = {}) {
-  return {
-    Operation: {
-      leave(operation, { config }) {
-        const absolutePath = path.isAbsolute(pathSecurityFile)
-          ? pathSecurityFile
-          : path.resolve(path.dirname(config.configPath), pathSecurityFile);
-        const doc = yaml.load(fs.readFileSync(absolutePath, 'utf8'));
-        
-        if (doc?.security === undefined || operation.security !== undefined) return;
-        operation.security = doc?.security;
-      },
-    },
-  };
-};
 ```
 
 Put this file alongside your `redocly.yaml` file, and add the following configuration to `redocly.yaml`:
@@ -58,7 +50,7 @@ plugins:
   - './plugin.js'
 
 decorators:
-  security-plugin/spread-security-to-operations:
+  security-plugin/spread-root-security:
     pathSecurityFile: ./foo.yaml
 ```
 
@@ -106,17 +98,13 @@ paths:
           description: Bad request
 ```
 
-Run the two-step workflow:
+Run:
 
 ```bash
-# Step 1: join the specs
-redocly join foo.yaml bar.yaml -o joined.yaml
-
-# Step 2: bundle with the decorator to spread security
-redocly bundle joined.yaml -o result.yaml
+redocly bundle bar.yaml -o result.yaml
 ```
 
-The resulting `result.yaml` will have `security: [oauth2: []]` applied to the `/pets` GET operation, because it had no security of its own.
+The resulting `result.yaml` will have `security: [oauth2: []]` spreaded at the root.
 
 ## References
 
