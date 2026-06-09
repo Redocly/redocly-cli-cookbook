@@ -10,7 +10,7 @@ When you use `redocly join` to combine multiple API descriptions into one, root-
 
 A common scenario is when one spec (for example, `foo.yaml`) defines shared infrastructure — security schemes and root-level `security` — but has no paths of its own, while another spec (`bar.yaml`) defines all the paths but has no `security` at all. After joining, the operations from `bar.yaml` end up with no security applied.
 
-This decorator (`spread-root-security`) solves that: it reads the root-level `security` from a specified source file (for example `foo.yaml`) and sets it as root-level `security` on the document you are bundling when that document does not already define its own. It runs as a `bundle` step, giving you full control over which file supplies the requirement.
+This decorator (`apply-root-security`) solves that: it reads the root-level `security` from a specified source file (for example `foo.yaml`) and sets it as root-level `security` on the document you are bundling when that document does not already define its own. It runs as a `bundle` step, giving you full control over which file supplies the requirement.
 
 ## Code
 
@@ -22,17 +22,25 @@ export default function plugin() {
     id: "security-plugin",
     decorators: {
       oas3: {
-        "spread-root-security": ({ pathSecurityFile }) => {
+        'apply-root-security': ({ pathSecurityFile } = {}) => {
           return {
             Root: {
               leave(root, { config }) {
-                const absolutePath = path.isAbsolute(pathSecurityFile)
-                  ? pathSecurityFile
-                  : path.resolve(path.dirname(config.configPath), pathSecurityFile);
-                const doc = yaml.load(fs.readFileSync(absolutePath, 'utf8'));
+                const doc = resolvePath(pathSecurityFile, config);
                 
-                if (doc?.security === undefined || root.security !== undefined) return;
+                if (doc?.security !== undefined || root.security === undefined){
                 root.security = doc?.security;
+                }
+
+                if (doc.components?.securitySchemes !== undefined) {
+                  if (!root.components) {
+                    root.components = {};
+                  }
+                  root.components.securitySchemes = {
+                    ...root.components.securitySchemes,
+                    ...doc.components.securitySchemes,
+                  };
+                }
               },
             },
           };
@@ -104,7 +112,7 @@ Run:
 redocly bundle bar.yaml -o result.yaml
 ```
 
-The resulting `result.yaml` will have `security: [oauth2: []]` spreaded at the root.
+The resulting `result.yaml` will have `security: [oauth2: []]` and `securitySchema` applied.
 
 ## References
 

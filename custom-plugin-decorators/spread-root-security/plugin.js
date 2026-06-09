@@ -3,17 +3,25 @@ export default function plugin() {
     id: "security-plugin",
     decorators: {
       oas3: {
-        "spread-root-security": ({ pathSecurityFile }) => {
+        'apply-root-security': ({ pathSecurityFile } = {}) => {
           return {
             Root: {
               leave(root, { config }) {
-                const absolutePath = path.isAbsolute(pathSecurityFile)
-                  ? pathSecurityFile
-                  : path.resolve(path.dirname(config.configPath), pathSecurityFile);
-                const doc = yaml.load(fs.readFileSync(absolutePath, 'utf8'));
+                const doc = resolvePath(pathSecurityFile, config);
                 
-                if (doc?.security === undefined || root.security !== undefined) return;
+                if (doc?.security !== undefined || root.security === undefined){
                 root.security = doc?.security;
+                }
+
+                if (doc.components?.securitySchemes !== undefined) {
+                  if (!root.components) {
+                    root.components = {};
+                  }
+                  root.components.securitySchemes = {
+                    ...root.components.securitySchemes,
+                    ...doc.components.securitySchemes,
+                  };
+                }
               },
             },
           };
