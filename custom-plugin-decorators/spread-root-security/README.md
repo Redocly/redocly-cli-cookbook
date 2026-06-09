@@ -28,8 +28,8 @@ export default function plugin() {
               leave(root, { config }) {
                 const doc = resolvePath(pathSecurityFile, config);
                 
-                if (doc?.security !== undefined || root.security === undefined){
-                root.security = doc?.security;
+                if (doc?.security !== undefined && root.security === undefined){
+                  root.security = doc?.security;
                 }
 
                 if (doc.components?.securitySchemes !== undefined) {
