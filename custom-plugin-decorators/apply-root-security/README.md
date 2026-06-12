@@ -31,18 +31,36 @@ Here's the main part of the decorator (from `decorator.js`):
 
 ```javascript
 export const applyRootSecurity = ({ pathSecurityFile } = {}) => {
+  let source = null;
+
   return {
     Root: {
-      leave(root, { config }) {
-        const doc = resolvePath(pathSecurityFile, config);
-
-        mergeSecurityRequirements(root, doc);
-        mergeSecuritySchemes(root, doc);
+      enter(_root, { config }) {
+        source = resolvePath(pathSecurityFile, config);
+      },
+      leave(root) {
+        if (!Array.isArray(source?.security) 
+          || JSON.stringify(root.security) === JSON.stringify(source?.security)) return;
+        root.security = [...(root.security || []), ...source.security]; 
       },
     },
+    Components(components) {
+      if (source?.components?.securitySchemes) {
+        components.securitySchemes = {
+          ...components.securitySchemes,
+          ...source.components.securitySchemes,
+        };
+      }
+    }
   };
 };
 ```
+
+In summary, this decorator does the following:
+
+1. Load the source security file once in `Root.enter` and share it across all visitor hooks.
+2. Visit the `Root` node and apply any security requirements from the source file that are not already present in the target document.
+3. Visit the `Components` node and merge security scheme definitions from the source file into the target, preserving existing schemes.
 
 The `resolvePath` function resolves the path to the security file and returns its parsed content:
 
@@ -51,29 +69,6 @@ function resolvePath(pathSecurityFile, config) {
   const base = config.configPath ? path.dirname(config.configPath) : process.cwd();
   const absolutePath = path.isAbsolute(pathSecurityFile) ? pathSecurityFile : path.resolve(base, pathSecurityFile);
   return yaml.load(fs.readFileSync(absolutePath, 'utf8'));
-};
-```
-
-The `mergeSecurityRequirements` function appends root-level security requirements from the source file into the target document. If the target already has security requirements defined, the entries are appended rather than replaced:
-
-```javascript
-function mergeSecurityRequirements(target, source){
-  if (!Array.isArray(source?.security) 
-    || JSON.stringify(target.security) === JSON.stringify(source?.security)) return;
-  target.security = [...(target.security || []), ...source.security]; 
-};
-```
-
-The `mergeSecuritySchemes` function merges the security scheme definitions from the source file into `components.securitySchemes` on the target document. If the target already has schemes defined, they are preserved and the new ones are added alongside them:
-
-```javascript
-function mergeSecuritySchemes(target, source) {
-  if (source?.components?.securitySchemes === undefined) return;
-  if (!target.components) target.components = {};
-  target.components.securitySchemes = {
-    ...target.components.securitySchemes,
-    ...source.components.securitySchemes,
-  };
 };
 ```
 

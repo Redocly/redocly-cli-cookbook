@@ -1,13 +1,25 @@
 export const applyRootSecurity = ({ pathSecurityFile } = {}) => {
+  let source = null;
+
   return {
     Root: {
-      leave(root, { config }) {
-        const doc = resolvePath(pathSecurityFile, config);
-
-        mergeSecurityRequirements(root, doc);
-        mergeSecuritySchemes(root, doc);
+      enter(_root, { config }) {
+        source = resolvePath(pathSecurityFile, config);
+      },
+      leave(root) {
+        if (!Array.isArray(source?.security) 
+          || JSON.stringify(root.security) === JSON.stringify(source?.security)) return;
+        root.security = [...(root.security || []), ...source.security]; 
       },
     },
+    Components(components) {
+      if (source?.components?.securitySchemes) {
+        components.securitySchemes = {
+          ...components.securitySchemes,
+          ...source.components.securitySchemes,
+        };
+      }
+    }
   };
 };
 
@@ -15,19 +27,4 @@ function resolvePath(pathSecurityFile, config) {
   const base = config.configPath ? path.dirname(config.configPath) : process.cwd();
   const absolutePath = path.isAbsolute(pathSecurityFile) ? pathSecurityFile : path.resolve(base, pathSecurityFile);
   return yaml.load(fs.readFileSync(absolutePath, 'utf8'));
-};
-
-function mergeSecurityRequirements(target, source){
-  if (!Array.isArray(source?.security) 
-    || JSON.stringify(target.security) === JSON.stringify(source?.security)) return;
-  target.security = [...(target.security || []), ...source.security]; 
-};
-
-function mergeSecuritySchemes(target, source) {
-  if (source?.components?.securitySchemes === undefined) return;
-  if (!target.components) target.components = {};
-  target.components.securitySchemes = {
-    ...target.components.securitySchemes,
-    ...source.components.securitySchemes,
-  };
 };
