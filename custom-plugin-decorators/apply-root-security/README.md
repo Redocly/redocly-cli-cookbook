@@ -58,9 +58,8 @@ export const applyRootSecurity = ({ pathSecurityFile } = {}) => {
 
 In summary, this decorator does the following:
 
-1. Load the source security file once in `Root.enter` and share it across all visitor hooks.
-2. Visit the `Root` node and apply any security requirements from the source file that are not already present in the target document.
-3. Visit the `Components` node and merge security scheme definitions from the source file into the target, preserving existing schemes.
+1. Visit the `Root` node and apply any security requirements from the source file that are not already present in the target document.
+2. Visit the `Components` node and merge security scheme definitions from the source file into the target, preserving existing schemes.
 
 The `resolvePath` function resolves the path to the security file and returns its parsed content:
 
