@@ -9,7 +9,7 @@ Authors:
 A custom plugin/decorator pair that sets the API server(s) URL(s) of the OpenAPI specification.
 If a `servers` field is already present, it will be overwritten.
 
-The [replace servers URL plugin example](https://redocly.com/docs/cli/guides/replace-servers-url), unfortunately, does not account for when the `servers` field is not already present in the OpenAPI specification.
+Unlike the [replace servers URL guide](https://redocly.com/docs/cli/guides/replace-servers-url), this decorator also works when the source description has no `servers` field, and it can set multiple server URLs at once.
 
 Some common use cases for this custom plugin and decorator set include:
 
