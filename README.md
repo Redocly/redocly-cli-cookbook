@@ -46,6 +46,7 @@ There are some fantastic examples of [configurable rules](https://redocly.com/do
 - [String schemas length defined](configurable-rules/string-schemas-length-defined/)
 - [JSON Schema misconfigurations](configurable-rules/json-schema-misconfigurations/)
 - [Azure APIM unsupported keywords](configurable-rules/azure-apim-unsupported-keyword/)
+- [Operation-deprecated-response-headers](configurable-rules/operation-deprecated-response-headers/)
 
 ### Custom plugins
 
