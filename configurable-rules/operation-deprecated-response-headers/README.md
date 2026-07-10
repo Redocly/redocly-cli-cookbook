@@ -1,4 +1,4 @@
-# `Deprecated` services SHOULD define a standard set of headers to communicate `Deprecation` and `Sunset` information. There should also exist a `Link` header to inform the consumer where the service location has been moved to, if any
+# Rules for enforcing a deprecation strategy
 
 Authors:
 
@@ -6,13 +6,18 @@ Authors:
 
 ## What this does and why
 
-There are three parts to a deprecation strategy. Defining _when_ (`deprecation`) the service will be deprecated, the `sunset` date of the service for it to be completely turned off, and a `link` to where a replacement service may exist. We use a number of RFC standards to define these header fields. 
+`Deprecated` services SHOULD define a standard set of headers to communicate `Deprecation` and `Sunset` information.
+There SHOULD also exist a `Link` header to inform the consumer where the service location has been moved to, if any.
 
-- [RFC7231][4]
-- [RFC8288][1]
-- [RFC8594][3]
-- [RFC9651][5]
-- [RFC9745][2]
+There are three parts to a deprecation strategy.
+Defining _when_ (`deprecation`) the service will be deprecated, the `sunset` date of the service for it to be completely turned off, and a `link` to where a replacement service may exist.
+We use these RFC standards to define these header fields:
+
+- [RFC7231 - Date/Time Formats](https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.1.1)
+- [RFC8288 - Web Linking](https://datatracker.ietf.org/doc/html/rfc8288)
+- [RFC8594 - HTTP Sunset Header Field](https://datatracker.ietf.org/doc/html/rfc9745/)
+- [RFC9651 - Dates] (https://datatracker.ietf.org/doc/html/rfc9651/#section-3.3.7)
+- [RFC 9745 - HTTP Deprecation Header Field](https://datatracker.ietf.org/doc/html/rfc9745/)
 
 ### 2XX responses
 
@@ -199,7 +204,7 @@ paths:
                 summary: A Structured Field Value as defined in Section 3.3.7 of RFC9651[5].
                 value: '@1688169599'
           sunset:
-            description: Please note that for historical reasons the Sunset HTTP header field uses a different data type for date than the Deprecation header field
+            description: For historical reasons the Sunset HTTP header field uses a different data type for date than the Deprecation header field
             schema:
               type: string
             examples:
@@ -237,8 +242,3 @@ paths:
             schema: {}
 ```
 
-[1]: https://datatracker.ietf.org/doc/html/rfc8288 "RFC8288 - Web Linking"
-[2]: https://datatracker.ietf.org/doc/html/rfc9745/ "RFC 9745 - HTTP Deprecation Header Field"
-[3]: https://datatracker.ietf.org/doc/html/rfc8594/ "RFC8594 - HTTP Sunset Header Field"
-[4]: https://datatracker.ietf.org/doc/html/rfc7231#section-7.1.1.1 "RFC7231 - Date/Time Formats"
-[5]: https://datatracker.ietf.org/doc/html/rfc9651/#section-3.3.7 "RFC9651 - Dates"

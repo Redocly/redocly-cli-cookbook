@@ -16,7 +16,7 @@ paths:
               type: string
             examples:
               deprecation_date:
-                summary: an Item Structured Header RFC8941. Refer to Section 3.3.7 of [SFBIS] for ABNF of `sf-date`
+                summary: An Item Structured Header RFC8941. Refer to Section 3.3.7 of [SFBIS] for ABNF of `sf-date`.
                 value: '@1688169599'
           sunset:
             description: Please note that for historical reasons the Sunset HTTP header field uses a different data type for date than the Deprecation header field
@@ -39,7 +39,7 @@ paths:
         description: Gone
         headers:
           sunset:
-            description: Please note that for historical reasons the Sunset HTTP header field uses a different data type for date than the Deprecation header field
+            description: For historical reasons the Sunset HTTP header field uses a different data type for date than the Deprecation header field.
             schema:
               type: string
             examples:
