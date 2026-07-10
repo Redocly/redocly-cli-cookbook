@@ -6,17 +6,18 @@ Authors:
 
 ## What this does and why
 
-A custom plugin/decorator pair that sets the API server(s) URL(s) of the OpenAPI specification. If a `servers` field is already present, it will be overwritten.
+A custom plugin/decorator pair that sets the API server(s) URL(s) of the OpenAPI specification.
+If a `servers` field is already present, it will be overwritten.
 
 The [replace servers URL plugin example](https://redocly.com/docs/cli/guides/replace-servers-url), unfortunately, does not account for when the `servers` field is not already present in the OpenAPI specification.
 
 Some common use cases for this custom plugin and decorator set include:
 
-- overriding server(s) URL(s) for different deployment environments, all without modifying the original OpenAPI specification.
-- ensuring all generated API documentation points to a specific gateway, or proxy endpoint.
-- standardizing server(s) URL(s) across multiple OpenAPI specifications, in a monorepo, or microservices architecture.
-- injecting mock server(s) URL(s) for testing purposes.
-- replacing internal server(s) URL(s) with public-facing server(s) URL(s), before publishing API documentation.
+- overriding server URLs for different deployment environments, all without modifying the original OpenAPI specification
+- ensuring all generated API documentation points to a specific gateway, or proxy endpoint
+- standardizing server URLs across multiple OpenAPI specifications, in a monorepo, or microservices architecture.
+- injecting mock server URLs for testing purposes.
+- replacing internal server URLs with public-facing server URLs, before publishing API documentation.
 
 ## Code
 
@@ -24,7 +25,7 @@ Some common use cases for this custom plugin and decorator set include:
 
 You can find the full decorator code in the [set-servers-urls-decorator.js](set-servers-urls-decorator.js) file.
 
-The decorator first validates the `serverUrl` argument, and then maps it to the OpenAPI `servers` field.
+The decorator validates the `serverUrl` argument, and then maps it to the OpenAPI `servers` field.
 
 ```javascript
 export default function SetServersUrls({ serverUrl = [] }) {
