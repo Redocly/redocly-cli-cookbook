@@ -154,7 +154,7 @@ All of the following field examples are acceptable:
 components:
   schemas:
     OrderStatus:
-      description: Order status. Orders progress from `placed` to `preparing` to `completed`, unless they are `canceled`.
+      description: Order status.
       type: string
       enum:
         - placed

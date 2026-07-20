@@ -165,5 +165,6 @@ You could also edit the plugin to make other field changes as you need.
 
 ## References
 
-- [GitHub REST API descriptions](https://github.com/github/rest-api-description)
+- [Redocly Cafe API](https://cafe.redocly.com/openapi/cafe), the API the example is based on
+- [GitHub REST API descriptions](https://github.com/github/rest-api-description), where the problem was initially spotted
 - [OpenAPI reference](https://spec.openapis.org/oas/latest.html)
