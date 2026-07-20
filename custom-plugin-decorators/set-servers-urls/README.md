@@ -120,5 +120,5 @@ paths:
 ## References
 
 - Redocly CLI - [Replace servers URL plugin example](https://redocly.com/docs/cli/guides/replace-servers-url)
-- Redocly - [museum-openapi-example openapi.yaml](https://github.com/Redocly/museum-openapi-example)
+- Redocly Cafe API - [cafe-openapi-example openapi.yaml](https://github.com/Redocly/cafe-api)
 - OpenAPI specification v3.1.0 - [Servers Object](https://spec.openapis.org/oas/v3.1.0#server-object)
