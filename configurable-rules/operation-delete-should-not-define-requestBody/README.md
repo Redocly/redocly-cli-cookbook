@@ -36,19 +36,23 @@ Here's a sample of an OpenAPI description:
 ```yaml
 openapi: 3.0.3
 info:
-  title: Title
+  title: Redocly Cafe
   version: 1.0.0
 paths:
-  /api/v1/thing/{thing-id}:
+  /orders/{orderId}:
     delete:
-      summary: a summary
-      description: delete with requestBody
+      summary: Delete an order
+      description: |
+        Delete the order.
+        To keep the order history, cancel the order instead of deleting it.
       parameters:
-        - name: thing-id
+        - name: orderId
           in: path
+          description: ID of the order to delete.
           required: true
           schema:
             type: string
+            pattern: ^ord_[0-9abcdefghjkmnpqrstvwxyz]{26}$
       requestBody: # <-- This will error
         description: a request body for my delete operation
         content:
@@ -56,18 +60,11 @@ paths:
             schema:
               type: object
               properties:
-                some_prop:
+                reason:
                   type: string
       responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: 
-                  some_prop:
-                    type: string
+        "204":
+          description: Order deleted successfully.
 
 ```
 [1]: https://www.rfc-editor.org/rfc/rfc9110#section-9.3.5-6 "RFC9110"

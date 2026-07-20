@@ -34,8 +34,8 @@ Here's a mini OpenAPI description, with a script tag in the `info.description` f
 ```yaml
 openapi: 3.1.0
 info:
-  title: Great API
-  description: This is an excellent <script>alert("Tricked you!");</script> API
+  title: Redocly Cafe
+  description: Manage the cafe menu and orders with this excellent <script>alert("Tricked you!");</script> API
 paths: {}
 ```
 

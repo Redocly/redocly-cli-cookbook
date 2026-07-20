@@ -65,19 +65,19 @@ Here is an example of an operation before and after:
 **Before**:
 
 ```yaml
-/aml-settings:
+/revenue:
   get:
-    summary: Retrieve AML settings
-    operationId: GetAmlSettings
-    x-sdk-operation-name: getAmlSettings
-    description: Retrieves AML settings.
+    summary: Get revenue statistics
+    operationId: getRevenue
+    x-sdk-operation-name: getRevenue
+    description: Retrieves revenue statistics.
     responses:
       "200":
-        description: AML settings retrieved.
+        description: Revenue statistics retrieved.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AmlSettings"
+              $ref: "#/components/schemas/RevenueStatistics"
       "401":
         $ref: "#/components/responses/Unauthorized"
       "403":
@@ -89,19 +89,19 @@ Here is an example of an operation before and after:
 **After**:
 
 ```yaml
-/aml-settings:
+/revenue:
   get:
-    summary: Retrieve AML settings
-    operationId: GetAmlSettings
-    x-sdk-operation-name: getAmlSettings
-    description: Retrieves AML settings.
+    summary: Get revenue statistics
+    operationId: getRevenue
+    x-sdk-operation-name: getRevenue
+    description: Retrieves revenue statistics.
     responses:
       "200":
-        description: AML settings retrieved.
+        description: Revenue statistics retrieved.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AmlSettings"
+              $ref: "#/components/schemas/RevenueStatistics"
       "401":
         $ref: "#/components/responses/Unauthorized"
       "403":

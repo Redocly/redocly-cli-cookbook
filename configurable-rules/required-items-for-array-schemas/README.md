@@ -46,12 +46,12 @@ Here's a sample of an OpenAPI description:
 # ...
 components:
   schemas:
-    NoItems: # This will error
+    OrderItems: # This will error
       type: array
-    WithItems: # This will pass
+    MenuItemNames: # This will pass
       type: array
       items:
         type: string
-    NotArray: # This will pass, doesn't match the 'where' clause
+    CustomerName: # This will pass, doesn't match the 'where' clause
       type: string
 ```

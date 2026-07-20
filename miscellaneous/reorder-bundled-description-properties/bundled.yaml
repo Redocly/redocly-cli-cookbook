@@ -1,6 +1,6 @@
 openapi: 3.1.0
 paths:
-  /test:
+  /menu:
     get:
       responses:
         '200':
@@ -11,4 +11,9 @@ paths:
 components:
   schemas:
     schema:
-      type: number
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer

@@ -39,9 +39,9 @@ Create/edit `redocly.yaml` as follows (edit with your own settings):
 ```yml
 apis:
   unchanged@latest:
-    root: ./petstore.yaml
+    root: ./cafe.yaml
   with-plugin@latest:
-    root: ./petstore.yaml
+    root: ./cafe.yaml
     decorators:
       plugin/remove-extensions:
         extensions:
@@ -69,256 +69,219 @@ Regular expressions follow [Javascript Regex convention](https://developer.mozil
 
 With the same config as above.
 
-Input OpenAPI (`petstore.yaml`):
+Input OpenAPI (`cafe.yaml`):
 
 ```yaml
 openapi: 3.0.0
 info:
   description:
-    "This is a sample server Petstore server.  You can find out more about
-    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
-    #swagger](http://swagger.io/irc/).  For this sample, you can use the api key
-    `special-key` to test the authorization filters."
-  version: 1.0.2
-  title: Swagger Petstore
-  termsOfService: http://swagger.io/terms/
+    "This is a sample Redocly Cafe server. Cafe operators (not customers) use
+    it to manage menus, orders, and revenue. Find out more at
+    [https://cafe.redocly.com](https://cafe.redocly.com)."
+  version: 1.0.0
+  title: Redocly Cafe
+  termsOfService: https://redocly.com/subscription-agreement
   contact:
-    email: apiteam@swagger.io
+    email: team@redocly.com
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: MIT
+    url: https://opensource.org/licenses/MIT
 tags:
-  - name: pet
-    description: Everything about your Pets
+  - name: Products
+    description: Operations related to products
     externalDocs:
       description: Find out more
-      url: http://swagger.io
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: http://swagger.io
-x-amazon-apigateway-api-key-source: HEADER,
+      url: https://cafe.redocly.com
+  - name: Orders
+    description: Order management operations
+x-amazon-apigateway-api-key-source: HEADER
 paths:
-  /pet:
-    post:
-      x-google-plugin-key-auth:
-        name: key-auth
-        enabled: true
-      tags:
-        - pet
-      summary: Add a new pet to the store
-      description: ""
-      operationId: addPet
-      requestBody:
-        $ref: "#/components/requestBodies/Pet"
-      responses:
-        "405":
-          description: Invalid input
-    put:
-      x-google-plugin-key-auth:
-        name: key-auth
-        enabled: true
-      x-internal: true
-      tags:
-        - pet
-      summary: Update an existing pet
-      description: ""
-      operationId: updatePet
-      requestBody:
-        $ref: "#/components/requestBodies/Pet"
-      responses:
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Pet not found
-        "405":
-          description: Validation exception
-  /pet/findByStatus:
+  /menu:
     get:
       x-google-plugin-key-auth:
         name: key-auth
         enabled: true
       tags:
-        - pet
-      summary: Finds Pets by status
-      description: Multiple status values can be provided with comma separated strings
-      operationId: findPetsByStatus
+        - Products
+      summary: List all menu items
+      description: Retrieve a collection of menu items with optional filtering
+      operationId: listMenuItems
+      parameters:
+        - name: search
+          in: query
+          description: Text search across menu item fields
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MenuItem"
+        "400":
+          description: Invalid search value
+    post:
+      x-google-plugin-key-auth:
+        name: key-auth
+        enabled: true
+      x-internal: true
+      tags:
+        - Products
+      summary: Create menu item
+      description: ""
+      operationId: createMenuItem
+      requestBody:
+        $ref: "#/components/requestBodies/MenuItem"
+      responses:
+        "201":
+          description: Menu item created
+        "400":
+          description: Invalid input
+  /orders:
+    get:
+      x-google-plugin-key-auth:
+        name: key-auth
+        enabled: true
+      tags:
+        - Orders
+      summary: List all orders
+      description:
+        Multiple status values can be provided with comma separated strings.
+        Use placed, preparing, completed for testing.
+      operationId: listOrders
       parameters:
         - name: status
           in: query
-          description: Status values that need to be considered for filter
-          required: true
+          description: Status values used to filter orders
+          required: false
           explode: true
           schema:
             type: array
             items:
               type: string
               enum:
-                - available
-                - pending
-                - sold
-              default: available
+                - placed
+                - preparing
+                - completed
+                - canceled
       responses:
         "200":
-          description: successful operation
+          description: Successful operation
           content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Pet"
+                  $ref: "#/components/schemas/Order"
         "400":
           description: Invalid status value
-  /pet/findByTags:
+  "/orders/{orderId}":
     get:
       tags:
-        - pet
-      summary: Finds Pets by tags
-      description:
-        Multiple tags can be provided with comma separated strings. Use tag1,
-        tag2, tag3 for testing.
-      operationId: findPetsByTags
+        - Orders
+      summary: Retrieve an order
+      description: Returns a single order
+      operationId: getOrderById
       parameters:
-        - name: tags
-          in: query
-          description: Tags to filter by
-          required: true
-          explode: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
-        "400":
-          description: Invalid tag value
-      deprecated: true
-  "/pet/{petId}":
-    get:
-      tags:
-        - pet
-      summary: Find pet by ID
-      description: Returns a single pet
-      operationId: getPetById
-      parameters:
-        - name: petId
+        - name: orderId
           in: path
-          description: ID of pet to return
+          description: ID of the order to retrieve
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "200":
-          description: successful operation
+          description: Successful operation
           content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Pet"
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: "#/components/schemas/Order"
         "400":
           description: Invalid ID supplied
         "404":
-          description: Pet not found
+          description: Order not found
 externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
+  description: Find out more about Redocly Cafe
+  url: https://cafe.redocly.com
 servers:
-  - url: https://petstore.swagger.io/v2
+  - url: https://api.cafe.redocly.com
 components:
   requestBodies:
-    Pet:
+    MenuItem:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Pet"
-        application/xml:
-          schema:
-            $ref: "#/components/schemas/Pet"
-      description: Pet object that needs to be added to the store
+            $ref: "#/components/schemas/MenuItem"
+      description: Menu item that needs to be added to the menu
       required: true
   schemas:
-    Category:
+    OrderItem:
       type: object
+      required:
+        - menuItemId
+        - quantity
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
+        menuItemId:
           type: string
-      xml:
-        name: Category
-    Tag:
-      type: object
-      properties:
-        id:
+        quantity:
           type: integer
-          format: int64
-        name:
+          minimum: 1
+        comment:
           type: string
-      xml:
-        name: Tag
-    Pet:
+          example: No sugar!
+    MenuItem:
       type: object
       required:
         - name
-        - photoUrls
+        - price
       properties:
         id:
-          type: integer
-          format: int64
-        category:
-          $ref: "#/components/schemas/Category"
+          type: string
+          example: prd_01h1s5z6vf2mm1mz3hevnn9va7
         name:
           x-internal: true
           type: string
-          example: doggie
-        photoUrls:
-          type: array
-          xml:
-            name: photoUrl
-            wrapped: true
-          items:
-            type: string
-        tags:
-          type: array
-          xml:
-            name: tag
-            wrapped: true
-          items:
-            $ref: "#/components/schemas/Tag"
+          example: Cappuccino
+        price:
+          type: integer
+          description: Price in cents
+          example: 4500
+        category:
+          x-internal: true
+          type: string
+          description: Menu item category
+          enum:
+            - beverage
+            - dessert
+    Order:
+      type: object
+      required:
+        - customerName
+        - orderItems
+      properties:
+        id:
+          type: string
+          example: ord_01h1s5z6vf2mm1mz3hevnn9va7
+        customerName:
+          type: string
+          example: Mary Ann
         status:
           x-internal: true
           type: string
-          description: pet status in the store
+          description: order status in the cafe
           enum:
-            - available
-            - pending
-            - sold
-      xml:
-        name: Pet
+            - placed
+            - preparing
+            - completed
+            - canceled
+        orderItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
 ```
 
 Output OpenAPI (`with-plugin.yaml`):
@@ -326,241 +289,199 @@ Output OpenAPI (`with-plugin.yaml`):
 ```yaml
 openapi: 3.0.0
 info:
-  description:
-    "This is a sample server Petstore server.  You can find out more about
-    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
-    #swagger](http://swagger.io/irc/).  For this sample, you can use the api key
-    `special-key` to test the authorization filters."
-  version: 1.0.2
-  title: Swagger Petstore
-  termsOfService: http://swagger.io/terms/
+  description: This is a sample Redocly Cafe server. Cafe operators (not customers) use it to manage menus, orders, and revenue. Find out more at [https://cafe.redocly.com](https://cafe.redocly.com).
+  version: 1.0.0
+  title: Redocly Cafe
+  termsOfService: https://redocly.com/subscription-agreement
   contact:
-    email: apiteam@swagger.io
+    email: team@redocly.com
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://api.cafe.redocly.com
 tags:
-  - name: pet
-    description: Everything about your Pets
+  - name: Products
+    description: Operations related to products
     externalDocs:
       description: Find out more
-      url: http://swagger.io
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: http://swagger.io
+      url: https://cafe.redocly.com
+  - name: Orders
+    description: Order management operations
+externalDocs:
+  description: Find out more about Redocly Cafe
+  url: https://cafe.redocly.com
 paths:
-  /pet:
-    post:
-      tags:
-        - pet
-      summary: Add a new pet to the store
-      description: ""
-      operationId: addPet
-      requestBody:
-        $ref: "#/components/requestBodies/Pet"
-      responses:
-        "405":
-          description: Invalid input
-    put:
-      x-internal: true
-      tags:
-        - pet
-      summary: Update an existing pet
-      description: ""
-      operationId: updatePet
-      requestBody:
-        $ref: "#/components/requestBodies/Pet"
-      responses:
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Pet not found
-        "405":
-          description: Validation exception
-  /pet/findByStatus:
+  /menu:
     get:
       tags:
-        - pet
-      summary: Finds Pets by status
-      description: Multiple status values can be provided with comma separated strings
-      operationId: findPetsByStatus
+        - Products
+      summary: List all menu items
+      description: Retrieve a collection of menu items with optional filtering
+      operationId: listMenuItems
+      parameters:
+        - name: search
+          in: query
+          description: Text search across menu item fields
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+        '400':
+          description: Invalid search value
+    post:
+      x-internal: true
+      tags:
+        - Products
+      summary: Create menu item
+      description: ''
+      operationId: createMenuItem
+      requestBody:
+        $ref: '#/components/requestBodies/MenuItem'
+      responses:
+        '201':
+          description: Menu item created
+        '400':
+          description: Invalid input
+  /orders:
+    get:
+      tags:
+        - Orders
+      summary: List all orders
+      description: Multiple status values can be provided with comma separated strings. Use placed, preparing, completed for testing.
+      operationId: listOrders
       parameters:
         - name: status
           in: query
-          description: Status values that need to be considered for filter
-          required: true
+          description: Status values used to filter orders
+          required: false
           explode: true
           schema:
             type: array
             items:
               type: string
               enum:
-                - available
-                - pending
-                - sold
-              default: available
+                - placed
+                - preparing
+                - completed
+                - canceled
       responses:
-        "200":
-          description: successful operation
+        '200':
+          description: Successful operation
           content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Pet"
-        "400":
+                  $ref: '#/components/schemas/Order'
+        '400':
           description: Invalid status value
-  /pet/findByTags:
+  /orders/{orderId}:
     get:
       tags:
-        - pet
-      summary: Finds Pets by tags
-      description:
-        Multiple tags can be provided with comma separated strings. Use tag1,
-        tag2, tag3 for testing.
-      operationId: findPetsByTags
+        - Orders
+      summary: Retrieve an order
+      description: Returns a single order
+      operationId: getOrderById
       parameters:
-        - name: tags
-          in: query
-          description: Tags to filter by
-          required: true
-          explode: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Pet"
-        "400":
-          description: Invalid tag value
-      deprecated: true
-  "/pet/{petId}":
-    get:
-      tags:
-        - pet
-      summary: Find pet by ID
-      description: Returns a single pet
-      operationId: getPetById
-      parameters:
-        - name: petId
+        - name: orderId
           in: path
-          description: ID of pet to return
+          description: ID of the order to retrieve
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
-        "200":
-          description: successful operation
+        '200':
+          description: Successful operation
           content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/Pet"
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
-        "400":
+                $ref: '#/components/schemas/Order'
+        '400':
           description: Invalid ID supplied
-        "404":
-          description: Pet not found
-externalDocs:
-  description: Find out more about Swagger
-  url: http://swagger.io
-servers:
-  - url: https://petstore.swagger.io/v2
+        '404':
+          description: Order not found
 components:
   requestBodies:
-    Pet:
+    MenuItem:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Pet"
-        application/xml:
-          schema:
-            $ref: "#/components/schemas/Pet"
-      description: Pet object that needs to be added to the store
+            $ref: '#/components/schemas/MenuItem'
+      description: Menu item that needs to be added to the menu
       required: true
   schemas:
-    Category:
+    OrderItem:
       type: object
+      required:
+        - menuItemId
+        - quantity
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
+        menuItemId:
           type: string
-      xml:
-        name: Category
-    Tag:
-      type: object
-      properties:
-        id:
+        quantity:
           type: integer
-          format: int64
-        name:
+          minimum: 1
+        comment:
           type: string
-      xml:
-        name: Tag
-    Pet:
+          example: No sugar!
+    MenuItem:
       type: object
       required:
         - name
-        - photoUrls
+        - price
       properties:
         id:
-          type: integer
-          format: int64
-        category:
-          $ref: "#/components/schemas/Category"
+          type: string
+          example: prd_01h1s5z6vf2mm1mz3hevnn9va7
         name:
           x-internal: true
           type: string
-          example: doggie
-        photoUrls:
-          type: array
-          xml:
-            name: photoUrl
-            wrapped: true
-          items:
-            type: string
-        tags:
-          type: array
-          xml:
-            name: tag
-            wrapped: true
-          items:
-            $ref: "#/components/schemas/Tag"
+          example: Cappuccino
+        price:
+          type: integer
+          description: Price in cents
+          example: 4500
+        category:
+          x-internal: true
+          type: string
+          description: Menu item category
+          enum:
+            - beverage
+            - dessert
+    Order:
+      type: object
+      required:
+        - customerName
+        - orderItems
+      properties:
+        id:
+          type: string
+          example: ord_01h1s5z6vf2mm1mz3hevnn9va7
+        customerName:
+          type: string
+          example: Mary Ann
         status:
           x-internal: true
           type: string
-          description: pet status in the store
+          description: order status in the cafe
           enum:
-            - available
-            - pending
-            - sold
-      xml:
-        name: Pet
+            - placed
+            - preparing
+            - completed
+            - canceled
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
 ```
 
 ## References

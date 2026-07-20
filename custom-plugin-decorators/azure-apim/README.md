@@ -44,21 +44,21 @@ Here is an example of an operation before and after:
 **Before**:
 
 ```yaml
-/fees:
+/orders:
   get:
-    summary: List fees
-    operationId: GetFees
-    description: Retrieves collection of fees.
+    summary: List orders
+    operationId: listOrders
+    description: Retrieves collection of orders.
     responses:
       "200":
-        description: Fees retrieved.
+        description: Orders retrieved.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fees"
+              $ref: "#/components/schemas/OrderList"
             examples:
-              regular-fee:
-                $ref: "#/components/examples/RegularFee"
+              order-list:
+                $ref: "#/components/examples/OrderList"
       "401":
         $ref: "#/components/responses/Unauthorized"
       "403":
@@ -70,18 +70,18 @@ Here is an example of an operation before and after:
 **After**:
 
 ```yaml
-/fees:
+/orders:
   get:
-    summary: List fees
-    operationId: GetFees
-    description: Retrieves collection of fees.
+    summary: List orders
+    operationId: listOrders
+    description: Retrieves collection of orders.
     responses:
       "200":
-        description: Fees retrieved.
+        description: Orders retrieved.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Fees"
+              $ref: "#/components/schemas/OrderList"
       "401":
         $ref: "#/components/responses/Unauthorized"
       "403":

@@ -112,8 +112,8 @@ The following sections show part of an API description, and the expected output.
 
 ```yaml
 post:
-  operationId: custom_auth_flow
-  summary: Custom Authentication
+  operationId: registerOAuth2Client
+  summary: Create OAuth2 client
   description: [...] # Omitted for brevity
   security: [...] # Omitted for brevity
   requestBody: [...] # Omitted for brevity
@@ -122,28 +122,28 @@ post:
     - lang: bash
       label: cURL
       source:
-        $ref: ./code_samples/auth/custom_auth/POST/curl.sh
+        $ref: ./code_samples/oauth2/register/POST/curl.sh
     - lang: ruby
       label: Ruby SDK
       source:
-        $ref: ./code_samples/auth/custom_auth/POST/ruby.rb
+        $ref: ./code_samples/oauth2/register/POST/ruby.rb
     - lang: python
       label: Python SDK
       source:
-        $ref: ./code_samples/auth/custom_auth/POST/python.py
+        $ref: ./code_samples/oauth2/register/POST/python.py
     - lang: java
       label: Java SDK
       source:
-        $ref: ./code_samples/auth/custom_auth/POST/java.java
+        $ref: ./code_samples/oauth2/register/POST/java.java
     - lang: kotlin
       label: Kotlin SDK
       source:
-        $ref: ./code_samples/auth/custom_auth/POST/kotlin.kt
+        $ref: ./code_samples/oauth2/register/POST/kotlin.kt
 ```
 
 ### Output
 
 ```bash
-api-docs/paths/auth/custom.yaml:
-  435:5  error    x-code-samples-check/check-sdk-coverage  Only 5 code samples: bash, ruby, python, java, kotlin but is missing the following SDK languages: javascript
+paths/oauth2-register.yaml:
+  9:5  error    x-code-samples-check/check-sdk-coverage  Only 5 code samples: bash, ruby, python, java, kotlin but is missing the following SDK languages: javascript
 ```

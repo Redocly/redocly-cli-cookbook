@@ -87,15 +87,15 @@ plugins:
 
 ## Examples
 
-With the `redocly.yaml` configuration above, and an example OpenAPI description (saved within a `api-one-definition.yaml` file, and taken from Redocly's [museum-openapi-example](https://github.com/Redocly/museum-openapi-example/blob/2770b2b2e59832d245c7b0eb0badf6568d7efb53/openapi.yaml)) as such:
+With the `redocly.yaml` configuration above, and an example OpenAPI description (saved within a `api-one-definition.yaml` file, and based on the [Redocly Cafe API](https://cafe.redocly.com/openapi/cafe)) as such:
 
 ```yaml
 openapi: 3.1.0
 info:
-  title: Redocly Museum API
+  title: Redocly Cafe
   ...
 servers:
-  - url: "https://redocly.com/_mock/docs/openapi/museum-api"
+  - url: "https://api.cafe.redocly.com"
 paths:
   ...
 ...
@@ -106,7 +106,7 @@ The resulting OpenAPI description (after applying the decorator) would be:
 ```yaml
 openapi: 3.1.0
 info:
-  title: Redocly Museum API
+  title: Redocly Cafe
   ...
 servers:
   - url: "https://api-one.development.com"

@@ -36,19 +36,21 @@ Here's a sample of an OpenAPI description:
 ```yaml
 openapi: 3.0.3
 info:
-  title: Title
+  title: Redocly Cafe
   version: 1.0.0
 paths:
-  /api/v1/thing/{thing-id}:
+  /orders/{orderId}:
     get:
-      summary: a summary
-      description: get with requestBody
+      summary: Retrieve an order
+      description: Retrieve a single order by its ID.
       parameters:
-        - name: thing-id
+        - name: orderId
           in: path
+          description: ID of the order to retrieve.
           required: true
           schema:
             type: string
+            pattern: ^ord_[0-9abcdefghjkmnpqrstvwxyz]{26}$
       requestBody: # <- This will error
         description: a request body for my get operation
         content:
@@ -56,17 +58,17 @@ paths:
             schema:
               type: object
               properties:
-                some_prop:
+                customerName:
                   type: string
       responses:
         "200":
-          description: OK
+          description: Successful operation.
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  some_prop:
+                properties:
+                  customerName:
                     type: string
 
 ```

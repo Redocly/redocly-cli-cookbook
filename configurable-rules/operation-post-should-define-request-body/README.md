@@ -52,46 +52,50 @@ Only one error is expected from this example because the second URI includes the
 ```yaml
 openapi: 3.0.3
 info:
-  title: Title
+  title: Redocly Cafe
   version: 1.0.0
 paths:
-  /api/v1/thing:
-    post:
-      summary: a summary
-      description: post missing requestBody
+  /orders:
+    post: # <-- This will error because there is no requestBody
+      summary: Create order
+      description: |
+        Create a new order.
+        Order items cannot be changed - if they need to be updated, cancel the order and place a new one.
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Order placed successfully.
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  some_prop:
+                properties:
+                  id:
                     type: string
-  /api/v1/thing/{thing-id}/actions/{action-id}:
-    post:
-      summary: a summary
-      description: post missing requestBody
-      parameters: 
-        - name: thing-id
+  /orders/{orderId}/actions/{actionId}:
+    post: # <-- No error because the /actions pattern is ignored by the rule
+      summary: Perform an order action
+      description: Perform an action on the order, such as canceling it.
+      parameters:
+        - name: orderId
           in: path
+          description: ID of the order to act on.
           required: true
           schema:
             type: string
-        - name: action-id
+            pattern: ^ord_[0-9abcdefghjkmnpqrstvwxyz]{26}$
+        - name: actionId
           in: path
           required: true
           schema:
             type: string
       responses:
         "200":
-          description: OK
+          description: Successful operation.
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  some_prop:
+                properties:
+                  id:
                     type: string
 ```

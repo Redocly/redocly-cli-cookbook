@@ -168,7 +168,7 @@ APIM documentation has a table of unsupported OpenAPI keywords. The following se
 
 ## Examples
 
-The following OpenAPI has schemas prefixed with either `Allowed` or `Unsupported` to show the configurable rules catch the likely bad uses of keywords.
+The following snippets show how the configurable rules catch the likely bad uses of keywords.
 
 ### Unsupported externalDocs
 
@@ -186,7 +186,7 @@ openapi: 3.1.0
 # ...
 ```
 
-The [example OpenAPI description](./openapi.yaml) has a variety of unsupported features in use.
+The [example OpenAPI description](./openapi.yaml), a small cafe API, has a variety of unsupported features in use.
 
 ## References
 

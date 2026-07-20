@@ -90,18 +90,18 @@ Given two specs:
 ```yaml
 openapi: 3.1.0
 info:
-  title: Foo
+  title: Cafe security
   version: 1.0.0
 security:
-  - oauth2: []
+  - OAuth2: []
 components:
   securitySchemes:
-    oauth2:
+    OAuth2:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://example.com/oauth/authorize
-          tokenUrl: https://example.com/oauth/token
+          authorizationUrl: https://api.cafe.redocly.com/oauth2/authorize
+          tokenUrl: https://api.cafe.redocly.com/oauth2/token
           scopes: {}
 paths: {}
 ```
@@ -110,13 +110,13 @@ paths: {}
 ```yaml
 openapi: 3.1.0
 info:
-  title: Bar
+  title: Redocly Cafe
   version: 1.0.0
 paths:
-  /pets:
+  /menu:
     get:
-      summary: Get pets example
-      operationId: getPetsExample
+      summary: List all menu items
+      operationId: listMenuItems
       responses:
         '200':
           description: OK
@@ -130,7 +130,7 @@ Run:
 redocly bundle bar.yaml -o result.yaml
 ```
 
-`result.yaml` will have `security: [{oauth2: []}]` and `components.securitySchemes.oauth2` applied.
+`result.yaml` will have `security: [{OAuth2: []}]` and `components.securitySchemes.OAuth2` applied.
 
 ## References
 

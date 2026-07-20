@@ -30,7 +30,7 @@ An OpenAPI specification without a `description` in `info` will cause an error:
 ```yaml
 openapi: 3.1.0
 info:
-  title: A non-descriptive API
+  title: Redocly Cafe (a non-descriptive API)
 paths: {}
 ```
 

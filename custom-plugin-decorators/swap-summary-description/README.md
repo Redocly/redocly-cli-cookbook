@@ -66,52 +66,52 @@ When you run `redocly bundle`, the API description(s) will have their field orde
 
 ## Examples
 
-Before the change (a tiny snippet from the [GitHub API Reference](https://github.com/github/rest-api-description) where I initially spotted this problem) with an OpenAPI structure around it:
+Before the change, an example based on the [Redocly Cafe API](https://cafe.redocly.com/openapi/cafe) with the fields reversed (the problem was initially spotted in the [GitHub API Reference](https://github.com/github/rest-api-description)):
 
 ```yaml
 openapi: 3.1.0
 info:
-  version: 1.1.4
-  title: GitHub v3 REST API
-  description: GitHub's v3 REST API.
+  version: 1.0.0
+  title: Redocly Cafe
+  description: Demo API for cafe operators to manage menus, orders, and revenue.
   license:
     name: MIT
-    url: https://spdx.org/licenses/MIT
-  termsOfService: https://docs.github.com/articles/github-terms-of-service
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://redocly.com/subscription-agreement
   contact:
-    name: Support
-    url: https://support.github.com/contact?tags=dotcom-rest-api
+    email: team@redocly.com
+    url: https://redocly.com/contact-us/
 webhooks:
-  branch-protection-configuration-disabled:
+  order-notification:
     post:
       summary: |-
-        This event occurs when there is a change to branch protection configurations for a repository.
-        For more information, see "[About protected branches](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)."
-        For information about using the APIs to manage branch protection rules, see "[Branch protection rule](https://docs.github.com/graphql/reference/objects#branchprotectionrule)" in the GraphQL documentation or "[Branch protection](https://docs.github.com/rest/branches/branch-protection)" in the REST API documentation.
+        This event occurs when a new order is placed in the cafe.
+        The payload contains the order ID, its status, and the time the event occurred.
+        Use it to update kitchen displays, or to notify baristas that a new order is waiting.
 
-        To subscribe to this event, a GitHub App must have at least read-level access for the "Administration" repository permission.
-      description: All branch protections were disabled for a repository.
-      operationId: branch-protection-configuration/disabled
+        To subscribe to this event, register a webhook URL when creating your OAuth2 client.
+      description: A new order was placed.
+      operationId: orderNotificationWebhook
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/webhook-branch-protection-configuration-disabled"
+              "$ref": "#/components/schemas/OrderNotification"
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
 
 components:
   schemas:
-    webhook-branch-protection-configuration-disabled:
-      title: branch protection configuration disabled event
+    OrderNotification:
+      title: order notification event
       type: object
       properties:
-        action:
+        orderStatus:
           type: string
           enum:
-            - disabled
+            - placed
 ```
 
 After the decorator has been run, the updated file looks like the following example:
@@ -119,46 +119,46 @@ After the decorator has been run, the updated file looks like the following exam
 ```yaml
 openapi: 3.1.0
 info:
-  version: 1.1.4
-  title: GitHub v3 REST API
-  description: GitHub's v3 REST API.
+  version: 1.0.0
+  title: Redocly Cafe
+  description: Demo API for cafe operators to manage menus, orders, and revenue.
   license:
     name: MIT
-    url: https://spdx.org/licenses/MIT
-  termsOfService: https://docs.github.com/articles/github-terms-of-service
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://redocly.com/subscription-agreement
   contact:
-    name: Support
-    url: https://support.github.com/contact?tags=dotcom-rest-api
+    email: team@redocly.com
+    url: https://redocly.com/contact-us/
 webhooks:
-  branch-protection-configuration-disabled:
+  order-notification:
     post:
-      summary: All branch protections were disabled for a repository.
+      summary: A new order was placed.
       description: |-
-        This event occurs when there is a change to branch protection configurations for a repository.
-        For more information, see "[About protected branches](https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)."
-        For information about using the APIs to manage branch protection rules, see "[Branch protection rule](https://docs.github.com/graphql/reference/objects#branchprotectionrule)" in the GraphQL documentation or "[Branch protection](https://docs.github.com/rest/branches/branch-protection)" in the REST API documentation.
+        This event occurs when a new order is placed in the cafe.
+        The payload contains the order ID, its status, and the time the event occurred.
+        Use it to update kitchen displays, or to notify baristas that a new order is waiting.
 
-        To subscribe to this event, a GitHub App must have at least read-level access for the "Administration" repository permission.
-      operationId: branch-protection-configuration/disabled
+        To subscribe to this event, register a webhook URL when creating your OAuth2 client.
+      operationId: orderNotificationWebhook
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/webhook-branch-protection-configuration-disabled"
+              $ref: '#/components/schemas/OrderNotification'
       responses:
-        "200":
+        '200':
           description: Return a 200 status to indicate that the data was received successfully
 components:
   schemas:
-    webhook-branch-protection-configuration-disabled:
-      title: branch protection configuration disabled event
+    OrderNotification:
+      title: order notification event
       type: object
       properties:
-        action:
+        orderStatus:
           type: string
           enum:
-            - disabled
+            - placed
 ```
 
 You could also edit the plugin to make other field changes as you need.

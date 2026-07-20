@@ -34,13 +34,13 @@ Here's an example of an OpenAPI description:
 ```yaml
 openapi: 3.1.0
 info:
-  title: Title
+  title: Redocly Cafe
   version: 1.0.0
 paths:
-  /good:
-    $ref: ./good.yaml
-  /wrong: # <-- This will error
-    $ref: ./wrong.yaml
+  /menu:
+    $ref: ./menu.yaml
+  /wrong-menu: # <-- This will error
+    $ref: ./wrong-menu.yaml
 ```
 
 ## References
