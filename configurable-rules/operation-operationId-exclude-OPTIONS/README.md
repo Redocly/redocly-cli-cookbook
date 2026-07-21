@@ -60,7 +60,7 @@ With the rule configured with `severity: error`, the following snippet of a `GET
 openapi: 3.1.0
 info: {}
 paths:
-  /example:
+  /menu:
     get: # Error: Operation is missing 'operationId' property. Rule: operation-operationId-exclude-OPTIONS
       responses:
         '200':

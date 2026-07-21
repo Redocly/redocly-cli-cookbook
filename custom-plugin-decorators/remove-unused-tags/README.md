@@ -104,32 +104,32 @@ decorators:
       - KeepMe
 ```
 
-Given an API description that uses only the `Events` and `Tickets` tags, the tags section would be transformed to remove the other tags.
+Given an API description that uses only the `Products` and `Orders` tags, the tags section would be transformed to remove the other tags.
 
 **Before bundling/decorating**:
 
 ```yaml
 tags:
-  - name: Tickets
-    description: Museum tickets for general entrance or special events.
-  - name: Extraneous
+  - name: Products
+    description: Operations related to products.
+  - name: Statistics
     description: This tag isn't used by any of the endpoints, so that should be detected and corrected.
   - name: Extra
     description: This tag isn't used by any of the endpoints, but we're keeping it anyway.
-  - name: Events
-    description: Special events hosted by the Museum
+  - name: Orders
+    description: Order management operations.
 ```
 
 Run the decorator and observe the API description tags section **after bundling/decorating**:
 
 ```yaml
 tags:
-  - name: Tickets
-    description: Museum tickets for general entrance or special events.
+  - name: Products
+    description: Operations related to products.
   - name: Extra
     description: This tag isn't used by any of the endpoints, but we're keeping it anyway.
-  - name: Events
-    description: Special events hosted by the Museum
+  - name: Orders
+    description: Order management operations.
 ```
 
 Use this decorator to tidy up when leftover tags remain in an OpenAPI description.

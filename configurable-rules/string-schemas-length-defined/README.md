@@ -39,38 +39,39 @@ The following OpenAPI has schemas prefixed with either `Good` or `Bad` to show t
 
 ```yaml
 openapi: 3.1.0
-info: 
-  title: For testing strict string definitions
+info:
+  title: Redocly Cafe strict string definitions
   version: 1.0.0
 paths: {}
-components: 
-  schemas: 
+components:
+  schemas:
 
-    LuckyNumber: # should not be caught be these rules
+    MenuItemPrice: # should not be caught by these rules
       type: integer
 
-    BadString:
+    BadCustomerName:
       type: string
 
-    BadStringWithMinLength:
+    BadCommentWithMinLength:
       type: string
       minLength: 1
 
-    BadStringWithMaxLength:
+    BadPhotoDescriptionWithMaxLength:
       type: string
-      maxLength: 64
-    
-    GoodStringBecauseEnum:
+      maxLength: 500
+
+    GoodOrderStatusBecauseEnum:
       type: string
       enum:
-        - ABC
-        - DEF
-        - GHI
+        - placed
+        - preparing
+        - completed
+        - canceled
 
-    GoodStringBecauseMinAndMaxLength:
+    GoodCustomerNameBecauseMinAndMaxLength:
       type: string
       minLength: 1
-      maxLength: 64
+      maxLength: 100
 ```
 
 ## References

@@ -30,12 +30,12 @@ Edit the `notPattern` section to add as many pipe-separated terms as you'd like 
 Acceptable description field:
 
 ```yaml
-      description: Fetch all registered users in a collection.
+      description: Retrieve all menu items in a collection.
 ```
 
 Unacceptable description field (but choose your own banned words):
 
 ```yaml
-      description: Fetch all registered users in a simple collection.
+      description: Retrieve all menu items in a simple collection.
 ```
 

@@ -156,26 +156,26 @@ Given an OpenAPI description with these opening lines:
 ```yaml
 openapi: 3.1.0
 info:
-  title: Redocly Museum API
+  title: Redocly Cafe
   description: |-
-    A fake, but awesome Museum API for interacting with museum services and information.
+    Demo API for cafe operators (not customers) to manage menus, orders, and revenue.
 
 
     ## Made by Redocly
-    Built with love by [Redocly](https://redocly.com).
+    Create API credentials and try it yourself at [Redocly Cafe](https://cafe.redocly.com).
   version: 1.0.0
 ```
 
 Linting (with `--format=stylish` for brevity) produces the following output:
 
 ```text
-validating museum.yaml...
+validating cafe.yaml...
 OpenAPI Markdown: validate
-museum.yaml:
-  4:16  warning  openapi-markdown/validate  Multiple consecutive blank lines (near: ## Details... )
-  4:16  warning  openapi-markdown/validate  Headings should be surrounded by blank lines (near: Built with love by [... )
+cafe.yaml:
+  4:16  warning  openapi-markdown/validate  Multiple consecutive blank lines (near:  ...)
+  4:16  warning  openapi-markdown/validate  Headings should be surrounded by blank lines (near: ## Made by Redocly ...)
 
-museum.yaml: validated in 70ms
+cafe.yaml: validated in 24ms
 
 Woohoo! Your API description is valid. 🎉
 You have 2 warnings.

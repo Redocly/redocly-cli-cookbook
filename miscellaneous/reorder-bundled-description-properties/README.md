@@ -56,7 +56,7 @@ Given an OpenAPI description:
 ```yaml
 openapi: 3.1.0
 paths:
-  /test:
+  /menu:
     get:
       responses:
         "200":
@@ -69,7 +69,12 @@ paths:
 which references a schema in a separate file `schema.yaml`:
 
 ```yaml
-type: number
+type: object
+properties:
+  name:
+    type: string
+  price:
+    type: integer
 ```
 
 bundling with `redocly bundle openapi.yaml -o bundled.yaml` will produce the following `bundled.yaml`:
@@ -77,18 +82,23 @@ bundling with `redocly bundle openapi.yaml -o bundled.yaml` will produce the fol
 ```yaml
 openapi: 3.1.0
 paths:
-  /test:
+  /menu:
     get:
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/schema"
+                $ref: '#/components/schemas/schema'
 components:
   schemas:
     schema:
-      type: number
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
 ```
 
 But if we want to reorder the properties in the `bundled.yaml` file, we can run `node reorder.js bundled.yaml` which will result in the following output:
@@ -97,15 +107,20 @@ But if we want to reorder the properties in the `bundled.yaml` file, we can run 
 components:
   schemas:
     schema:
-      type: number
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
 paths:
-  /test:
+  /menu:
     get:
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/schema"
+                $ref: '#/components/schemas/schema'
 openapi: 3.1.0
 ```

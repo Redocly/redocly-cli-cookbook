@@ -167,11 +167,11 @@ rule/response-410-deprecated-must-not-define-deprecation-header:
 #invalid
 openapi: 3.1.0
 info:
-  title: Redocly Configurable Rule - Deprecated Endpoints
+  title: Redocly Cafe - deprecated endpoints
   version: 0.0.0
 paths:
-  '/things':
-    summary: my deprecated endpoint
+  '/menu-items':
+    summary: legacy menu items endpoint, replaced by /menu
     deprecated: true
     responses:
       '200':
@@ -185,11 +185,11 @@ paths:
 # valid
 openapi: 3.1.0
 info:
-  title: Redocly Configurable Rule - Deprecated Endpoints
+  title: Redocly Cafe - deprecated endpoints
   version: 0.0.0
 paths:
-  '/things':
-    summary: my deprecated endpoint
+  '/menu-items':
+    summary: legacy menu items endpoint, replaced by /menu
     deprecated: true
     parameters: []
     responses:
@@ -216,7 +216,7 @@ paths:
               type: string
             examples:
               link_value:
-                value: <https://example.org/more-things/123>; rel=alternate; title='the more-things api'
+                value: <https://api.cafe.redocly.com/menu>; rel=alternate; title='the menu api'
         content:
           'application/json':
             schema: {}
@@ -236,7 +236,7 @@ paths:
               type: string
             examples:
               link_value:
-                value: <https://example.org/more-things/123>; rel=alternate; title='the more-things api'
+                value: <https://api.cafe.redocly.com/menu>; rel=alternate; title='the menu api'
         content:
           'application/json':
             schema: {}

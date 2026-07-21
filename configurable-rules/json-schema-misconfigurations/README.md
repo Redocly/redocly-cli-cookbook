@@ -67,44 +67,44 @@ The following OpenAPI has schemas prefixed with either `Good` or `Bad` to show t
 
 ```yaml
 openapi: 3.1.0
-info: 
-  title: Unintended schema misconfigurations
+info:
+  title: Redocly Cafe schema misconfigurations
   version: 1.0.0
 paths: {}
-components: 
-  schemas: 
+components:
+  schemas:
 
-    BadString:
+    BadCustomerName:
       type: string
-      minimum: 5
-      maximum: 10
+      minimum: 1
+      maximum: 100
 
-    GoodNumber:
-      type: number
-      minimum: 5
-      maximum: 10
-        
-    GoodString:
+    GoodPrice:
+      type: integer
+      minimum: 0
+      maximum: 10000
+
+    GoodCustomerName:
       type: string
-      minLength: 5
-      maxLength: 10
-  
-    BadObject:
+      minLength: 1
+      maxLength: 100
+
+    BadOrder:
       type: object
-      items: 
+      items:
         type: string
-    
-    GoodObject:
+
+    GoodOrder:
       type: object
       properties:
-        foo:
-          $ref: "#/components/schemas/GoodString"
-    
-    BadArray:
+        customerName:
+          $ref: "#/components/schemas/GoodCustomerName"
+
+    BadOrderItems:
       type: array
-      properties: 
-        foo:
-          $ref: "#/components/schemas/GoodString"
+      properties:
+        customerName:
+          $ref: "#/components/schemas/GoodCustomerName"
 ```
 
 

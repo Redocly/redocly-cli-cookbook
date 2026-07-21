@@ -70,20 +70,20 @@ Now with an OpenAPI description that has more than one tag listed at the top lev
 
 ```yaml
 tags:
-  - name: user
-    description: Users
-  - name: site
-    description: Restaurant sites
+  - name: Products
+    description: Operations related to products.
+  - name: Orders
+    description: Order management operations.
 ```
 
 **After**:
 
 ```yaml
 tags:
-  - name: site
-    description: Restaurant sites
-  - name: user
-    description: Users
+  - name: Orders
+    description: Order management operations.
+  - name: Products
+    description: Operations related to products.
 ```
 
 ## References

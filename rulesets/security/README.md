@@ -123,11 +123,11 @@ By intentionally securing each endpoint with an appropriate configuration, secur
 Each operation should look like the example below:
 
 ```yaml
-  operationId: getMuseumHours
+  operationId: getRevenue
+  summary: Get revenue statistics
   security:
-  summary: Get museum hours
-    - ReaderAuth
-  description: Get upcoming museum operating hours.
+    - ApiKey: []
+  description: Retrieve revenue statistics for a configurable date range.
 ```
 
 This approach also makes it easier to use tighter security for endpoints with side effects.
@@ -139,7 +139,7 @@ This rule identifies any plain `http://` URLs in the server array, such as the f
 
 ```yaml
 servers:
-  - url: "http://example.com/museum-api/"
+  - url: "http://api.cafe.redocly.com"
 ```
 
 Correct this problem by using `https://` URLs for all endpoints.
@@ -153,23 +153,24 @@ All of the following field examples are acceptable:
 ```yaml
 components:
   schemas:
-    TicketType:
-      description: Type of ticket being purchased. Use `general` for regular museum entry and `event` for tickets to special events.
+    OrderStatus:
+      description: Order status.
       type: string
       enum:
-        - event
-        - general
-      example: event
-    Delivery:
-      description: The method of ticket delivery for the purchased ticket.
+        - placed
+        - preparing
+        - completed
+        - canceled
+      example: placed
+    Object:
+      description: Entity name.
       type: string
-      const: Digital
-    Email:
-      description: Email address for ticket purchaser.
+      const: order
+    CustomerName:
+      description: Name of the customer who placed the order.
       type: string
-      format: email
-      maxLength: 120
-      example: museum-lover@example.com
+      maxLength: 100
+      example: Mary Ann
 ```
 
 Note that the `const` keyword came in with the updated JSON Schema version in OpenAPI 3.1.
@@ -183,12 +184,12 @@ By setting a maximum array size to a sensible limit, you can avoid having your A
 The following example shows an array field with a limit set:
 
 ```yaml
-    EventDates:
+    OrderItems:
       type: array
-      maxItems: 4
+      maxItems: 10
       items:
-        $ref: "#/components/schemas/Date"
-      description: List of planned dates for the special event.
+        $ref: "#/components/schemas/OrderItem"
+      description: List of items to include in the order.
 ```
 
 Pick a limit that's generous for the size of the data that you expect, but small enough that it can be handled without performance implications.
