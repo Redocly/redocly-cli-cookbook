@@ -1,6 +1,7 @@
 # Redocly CLI Cookbook
 
-> ⚠️ **This repository has been moved.** The cookbook is now part of the [Redocly CLI repository](https://github.com/Redocly/redocly-cli/tree/main/cookbook). This repository is no longer maintained — please find the latest examples there, and open any new issues or pull requests in the new location.
+> [!WARNING]
+> **This repository has been moved.** The cookbook is now part of the [Redocly CLI repository](https://github.com/Redocly/redocly-cli/tree/main/cookbook). This repository is no longer maintained — please find the latest examples there, and open any new issues or pull requests in the new location.
 
 ---
 
