@@ -1,5 +1,10 @@
 # Redocly CLI Cookbook
 
+> [!WARNING]
+> **This repository has been moved.** The cookbook is now part of the [Redocly CLI repository](https://github.com/Redocly/redocly-cli/tree/main/cookbook). This repository is no longer maintained — please find the latest examples there, and open any new issues or pull requests in the new location.
+
+---
+
 A community collection of rulesets, configuration, custom plugins and other additions for [Redocly CLI](https://github.com/Redocly/redocly-cli). We know our users have some great tips, examples, and code to share, and this is the place to do just that. We would love to have your [contributions](#contributing) here too!
 
 > [!IMPORTANT]
